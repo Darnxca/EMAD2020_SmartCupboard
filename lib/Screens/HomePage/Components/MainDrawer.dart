@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:smart_cupboard/Screens/Aggiunta/aggiunta.dart';
+import 'package:smart_cupboard/Screens/LaMiaDIspensa/MyDispensaScreen.dart';
 import 'package:smart_cupboard/Screens/ListaSpesa/lista_spesa.dart';
 import 'package:smart_cupboard/Screens/Profilo/profilo.dart';
 import 'package:smart_cupboard/Screens/RicercaRicette/ricerca_ricette.dart';
@@ -56,7 +56,7 @@ class MainDrawer extends StatelessWidget{
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return AggiuntaProdotto();
+                      return MyDispensaScreen();
                     },
                   ) ,
                 );

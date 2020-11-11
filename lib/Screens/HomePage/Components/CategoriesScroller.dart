@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smart_cupboard/Screens/LaMiaDIspensa/MyDispensaScreen.dart';
 
 import '../../../constants.dart';
 
@@ -19,34 +20,46 @@ class CategoriesScroller extends StatelessWidget {
           alignment: Alignment.topCenter,
           child: Row(
             children: <Widget>[
-              Container(
-                width: categoryWidtht,
-                margin: EdgeInsets.only(right: 20),
-                height: 150,
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage("assets/images/farine_e_derivati.jpg"),
-                      fit: BoxFit.cover,
-                    ),
-                    borderRadius: BorderRadius.all(Radius.circular(20.0))),
-                child: Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: <Widget>[
-                      Text(
-                        "Farine e derivati",
-                        style: TextStyle(
-                            fontSize: 18,
-                            color: Black,
-                            backgroundColor: Colors.grey[350],
-                            fontWeight: FontWeight.bold),
+              InkWell(
+                child: Container(
+                  width: categoryWidtht,
+                  margin: EdgeInsets.only(right: 20),
+                  height: 150,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage("assets/images/farine_e_derivati.jpg"),
+                        fit: BoxFit.cover,
                       ),
-                    ],
+                      borderRadius: BorderRadius.all(Radius.circular(20.0))),
+                  child: Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: <Widget>[
+                        Text(
+                          "Farine e derivati",
+                          style: TextStyle(
+                              fontSize: 18,
+                              color: Black,
+                              backgroundColor: Colors.grey[350],
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return MyDispensaScreen();
+                      },
+                    ),
+                  );
+                },
               ),
               Container(
                 width: categoryWidtht,

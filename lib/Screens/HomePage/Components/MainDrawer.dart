@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:smart_cupboard/Screens/Aggiunta/aggiunta.dart';
 import 'package:smart_cupboard/Screens/ListaSpesa/lista_spesa.dart';
 import 'package:smart_cupboard/Screens/Profilo/profilo.dart';
+import 'package:smart_cupboard/Screens/RicercaRicette/ricerca_ricette.dart';
 import 'package:smart_cupboard/constants.dart';
 import 'package:smart_cupboard/Screens/Login/login_screen.dart';
 
@@ -50,7 +52,15 @@ class MainDrawer extends StatelessWidget{
                   fontSize: 18,
                 ),
               ),
-              onTap: null,
+                onTap: (){   Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return AggiuntaProdotto();
+                    },
+                  ) ,
+                );
+                }
             ),
             ListTile(
               leading: Icon(Icons.arrow_right),
@@ -79,7 +89,15 @@ class MainDrawer extends StatelessWidget{
                   fontSize: 18,
                 ),
               ),
-              onTap: null,
+                onTap: (){   Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return RicercaRicette();
+                    },
+                  ) ,
+                );
+                }
             ),
             ListTile(
               leading: Icon(Icons.arrow_right),

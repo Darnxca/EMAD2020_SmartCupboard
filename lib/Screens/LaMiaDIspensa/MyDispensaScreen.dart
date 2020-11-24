@@ -7,12 +7,7 @@ import '../../constants.dart';
 
 
 class MyDispensaScreen extends StatefulWidget  {
-
-
   State createState() => new MyDispensaScreenState();
-
-
-
 }
 
 class MyDispensaScreenState extends State<MyDispensaScreen> with TickerProviderStateMixin {

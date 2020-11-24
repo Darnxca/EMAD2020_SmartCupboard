@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "197246850699",
+    "firebase_url": "https://smart-cupboard.firebaseio.com",
+    "project_id": "smart-cupboard",
+    "storage_bucket": "smart-cupboard.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:197246850699:android:1b23ad69041845cf2a668e",
+        "android_client_info": {
+          "package_name": "com.unisa.smart_cupboard"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "197246850699-chnqknn70e367dmb90rpgvt9nnidhm4u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArlAerQ8ESD5bCm62er7cEXjPBFMwl-XU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "197246850699-chnqknn70e367dmb90rpgvt9nnidhm4u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -4,7 +4,11 @@ import 'package:smart_cupboard/Screens/ListaSpesa/lista_spesa.dart';
 import 'package:smart_cupboard/Screens/Profilo/profilo.dart';
 import 'package:smart_cupboard/Screens/RicercaRicette/ricerca_ricette.dart';
 import 'package:smart_cupboard/constants.dart';
+import 'package:provider/provider.dart';
+
 import 'package:smart_cupboard/Screens/Login/login_screen.dart';
+
+import '../../../AuthenticationService.dart';
 
 class MainDrawer extends StatelessWidget{
 
@@ -127,20 +131,11 @@ class MainDrawer extends StatelessWidget{
                 ),
               ),
               onTap: (){
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return LoginScreen();
-                    },
-                  ),
-                );
+                context.read<AuthenticationService>().signOut(context);
               },
             ),
           ],
         )
-
-
     );
   }
 }

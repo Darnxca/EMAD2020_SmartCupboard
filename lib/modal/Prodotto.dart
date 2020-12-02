@@ -1,9 +1,7 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 class Prodotto {
-
   String _nome, _categoria;
-
 
   Prodotto(this._nome, this._categoria);
 
@@ -34,5 +32,13 @@ class Prodotto {
 
   @override
   int get hashCode => _nome.hashCode ^ _categoria.hashCode;
-}
 
+  Prodotto.fromJson(Map<String, dynamic> json)
+      : _nome = json['nome'],
+        _categoria = json['categoria'];
+
+  Map<String, dynamic> toJson() => {
+        'name': _nome,
+        'categoria': _categoria,
+      };
+}

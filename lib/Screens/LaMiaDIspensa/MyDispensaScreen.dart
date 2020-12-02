@@ -4,6 +4,7 @@ import 'package:smart_cupboard/Screens/Aggiunta/aggiunta.dart';
 import 'package:smart_cupboard/Screens/HomePage/Components/MainDrawer.dart';
 import 'package:smart_cupboard/Screens/LaMiaDIspensa/components/body.dart';
 import 'package:smart_cupboard/UserPreferences.dart';
+import 'package:smart_cupboard/modal/Prodotto.dart';
 import '../../constants.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
@@ -14,6 +15,7 @@ class MyDispensaScreen extends StatefulWidget {
 class MyDispensaScreenState extends State<MyDispensaScreen>
     with TickerProviderStateMixin {
   AnimationController _controller;
+  Prodotto p;
   GetDataService service = GetDataService();
 
   static const List<IconData> icons = const [Icons.qr_code, Icons.keyboard];
@@ -23,14 +25,11 @@ class MyDispensaScreenState extends State<MyDispensaScreen>
   Future getCodiceEan() async {
     codice = await FlutterBarcodeScanner.scanBarcode(
         "#004297", "Cancella", true, ScanMode.BARCODE);
+
     setState(() {
       print(codice);
-      if (service.getProdotti(codice) != null) {
-        print("PRODOTTO Non TROVATO");
-      } else {
-        UserPreferences().data = dataSharedPreferences + codice;
-        print("SHARED " + UserPreferences().data);
-      }
+      service.getProdotti(codice);
+
     });
   }
 

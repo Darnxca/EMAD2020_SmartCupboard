@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:firebase_database/firebase_database.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smart_cupboard/modal/Dispensa.dart';
 
 import 'UserPreferences.dart';
@@ -11,19 +12,27 @@ class GetDataService {
   Prodotto result;
   Dispensa dispensa;
   String dataSharedPreferences;
+  SharedPreferences prefs;
 
   GetDataService(){
     getShared();
-    if(UserPreferences().data != ''){
-      dispensa = Dispensa.fromJson(jsonDecode(UserPreferences().data));
-    }else{
-      dispensa = Dispensa(new List<Prodotto>());
-    }
   }
 
-  void getShared() async {
-    await UserPreferences().init();
-    dataSharedPreferences = UserPreferences().data;
+   getShared() async {
+    //await UserPreferences().init();
+   // dataSharedPreferences = UserPreferences().data;
+    prefs = await SharedPreferences.getInstance();
+
+    dataSharedPreferences = (prefs.getString('counter') ?? "");
+    print('Pressed '+dataSharedPreferences+ ' times.');
+
+    if(dataSharedPreferences.compareTo("")==0){
+      print("ciao2");
+      dispensa = Dispensa(new List<Prodotto>());
+    }else{
+      print("ciao");
+      dispensa = Dispensa.fromJson(jsonDecode(dataSharedPreferences));
+    }
   }
 
   Future getProdotti(String codice) async {
@@ -37,8 +46,8 @@ class GetDataService {
         print("FIREBASE: " + result.toString());
         dispensa.addProdotto(result);
           print("PRODOTTTOOOOOOO: " + result.toString());
-          UserPreferences().data = dataSharedPreferences + jsonEncode(dispensa);
-          print("SHARED " + UserPreferences().data);
+        dataSharedPreferences = dataSharedPreferences + jsonEncode(dispensa);
+          print("SHARED " + dataSharedPreferences);
 
       } on NoSuchMethodError catch (e) {
         print("Prodotto non trovato");

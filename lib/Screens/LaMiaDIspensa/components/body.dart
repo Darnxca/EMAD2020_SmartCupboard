@@ -1,5 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:smart_cupboard/Screens/Aggiunta/aggiunta.dart';
 import 'package:smart_cupboard/Screens/Login/login_screen.dart';
 import 'package:smart_cupboard/Screens/Signup/signup_screen.dart';
 import 'package:smart_cupboard/Screens/Welcome/components/background.dart';
@@ -17,6 +20,39 @@ class BodyExpansionPanel extends StatefulWidget {
 
 class _BodyExpansionPanelState extends State<BodyExpansionPanel> {
   List<Item> _books = generateItems();
+  String data ;
+
+  getShared() async{
+    //await UserPreferences().init();
+    // dataSharedPreferences = UserPreferences().data;
+    SharedPreferences prefs = await SharedPreferences.getInstance() ;
+
+    String dataSharedPreferences = (prefs.getString('counter') ?? "");
+    print('Pressed '+dataSharedPreferences+ ' times.');
+
+    if(dataSharedPreferences.compareTo("")==0){
+      print("ciao2");
+      //dispensa = Dispensa(new List<Prodotto>());
+    }else {
+      print("ciao");
+      //dispensa = Dispensa.fromJson(jsonDecode(dataSharedPreferences));
+    }
+
+    setState(() {
+      data = dataSharedPreferences;
+    });
+
+
+  }
+
+  @override
+  void initState() {
+    getShared();
+
+    print(data);
+
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -125,7 +161,7 @@ class Prodotti {
   String name;
 }
 
-List<Item> generateItems() {
+List<Item> generateItems()  {
   List<Item> listItems = [];
   List<Prodotti> listProdotti = [];
   List<dynamic> responseList = CATEGORY_DATA;

@@ -3,7 +3,6 @@ import 'package:smart_cupboard/GetDataService.dart';
 import 'package:smart_cupboard/Screens/Aggiunta/aggiunta.dart';
 import 'package:smart_cupboard/Screens/HomePage/Components/MainDrawer.dart';
 import 'package:smart_cupboard/Screens/LaMiaDIspensa/components/body.dart';
-import 'package:smart_cupboard/UserPreferences.dart';
 import 'package:smart_cupboard/modal/Prodotto.dart';
 import '../../constants.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
@@ -20,7 +19,7 @@ class MyDispensaScreenState extends State<MyDispensaScreen>
 
   static const List<IconData> icons = const [Icons.qr_code, Icons.keyboard];
 
-  String codice, dataSharedPreferences;
+  String codice;
 
   Future getCodiceEan() async {
     codice = await FlutterBarcodeScanner.scanBarcode(

@@ -38,7 +38,7 @@ class GetDataService {
         dispensa.addProdotto(result);
           print("PRODOTTTOOOOOOO: " + result.toString());
           UserPreferences().data = dataSharedPreferences + jsonEncode(dispensa);
-          print("SHARED " + jsonDecode(UserPreferences().data));
+          print("SHARED " + UserPreferences().data);
 
       } on NoSuchMethodError catch (e) {
         print("Prodotto non trovato");

@@ -33,10 +33,7 @@ class MyDispensaScreenState extends State<MyDispensaScreen>
     });
   }
 
-  void getShared() async {
-    await UserPreferences().init();
-    dataSharedPreferences = UserPreferences().data;
-  }
+
 
   @override
   void initState() {
@@ -45,7 +42,7 @@ class MyDispensaScreenState extends State<MyDispensaScreen>
       duration: const Duration(milliseconds: 500),
     );
 
-    getShared(); //recuepero le shared preferences
+
   }
 
   Widget build(BuildContext context) {

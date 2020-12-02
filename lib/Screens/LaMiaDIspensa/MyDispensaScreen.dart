@@ -1,25 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:smart_cupboard/GetDataService.dart';
 import 'package:smart_cupboard/Screens/Aggiunta/aggiunta.dart';
 import 'package:smart_cupboard/Screens/HomePage/Components/MainDrawer.dart';
 import 'package:smart_cupboard/Screens/LaMiaDIspensa/components/body.dart';
+import 'package:smart_cupboard/UserPreferences.dart';
 import '../../constants.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
-class MyDispensaScreen extends StatefulWidget  {
+class MyDispensaScreen extends StatefulWidget {
   State createState() => new MyDispensaScreenState();
 }
 
-class MyDispensaScreenState extends State<MyDispensaScreen> with TickerProviderStateMixin {
+class MyDispensaScreenState extends State<MyDispensaScreen>
+    with TickerProviderStateMixin {
   AnimationController _controller;
+  GetDataService service = GetDataService();
 
-  static const List<IconData> icons = const [ Icons.qr_code, Icons.keyboard];
+  static const List<IconData> icons = const [Icons.qr_code, Icons.keyboard];
 
-  String codice;
-  Future getCodiceEan() async{
-    codice = await FlutterBarcodeScanner.scanBarcode("#004297", "Cancella", true,ScanMode.BARCODE);
+  String codice, dataSharedPreferences;
+
+  Future getCodiceEan() async {
+    codice = await FlutterBarcodeScanner.scanBarcode(
+        "#004297", "Cancella", true, ScanMode.BARCODE);
     setState(() {
       print(codice);
+      if (service.getProdotti(codice) != null) {
+        print("PRODOTTO Non TROVATO");
+      } else {
+        UserPreferences().data = dataSharedPreferences + codice;
+        print("SHARED " + UserPreferences().data);
+      }
     });
+  }
+
+  void getShared() async {
+    await UserPreferences().init();
+    dataSharedPreferences = UserPreferences().data;
   }
 
   @override
@@ -28,9 +45,9 @@ class MyDispensaScreenState extends State<MyDispensaScreen> with TickerProviderS
       vsync: this,
       duration: const Duration(milliseconds: 500),
     );
+
+    getShared(); //recuepero le shared preferences
   }
-
-
 
   Widget build(BuildContext context) {
     Color backgroundColor = kPrimaryColor;
@@ -52,11 +69,8 @@ class MyDispensaScreenState extends State<MyDispensaScreen> with TickerProviderS
             child: new ScaleTransition(
               scale: new CurvedAnimation(
                 parent: _controller,
-                curve: new Interval(
-                    0.0,
-                    1.0 - index / icons.length / 2.0,
-                    curve: Curves.easeOut
-                ),
+                curve: new Interval(0.0, 1.0 - index / icons.length / 2.0,
+                    curve: Curves.easeOut),
               ),
               child: new FloatingActionButton(
                 heroTag: null,
@@ -65,52 +79,50 @@ class MyDispensaScreenState extends State<MyDispensaScreen> with TickerProviderS
                 child: new Icon(icons[index], color: foregroundColor),
                 onPressed: () {
                   if (index == 1) {
-
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return AggiuntaProdotto();
-                          },
-                        ),
-                      );
-
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return AggiuntaProdotto();
+                        },
+                      ),
+                    );
                   } else {
                     getCodiceEan();
                   }
-
-
                 },
               ),
             ),
           );
           return child;
-        }).toList()..add(
-          new FloatingActionButton(
-            heroTag: null,
-            backgroundColor: kPrimaryColor,
-            child: new AnimatedBuilder(
-              animation: _controller,
-              builder: (BuildContext context, Widget child) {
-                return new Transform(
-                  transform: new Matrix4.rotationZ(_controller.value * 0.5 *3.14),
-                  alignment: FractionalOffset.center,
-                  child: new Icon(_controller.isDismissed ? Icons.add : Icons.close_sharp),
-                );
+        }).toList()
+          ..add(
+            new FloatingActionButton(
+              heroTag: null,
+              backgroundColor: kPrimaryColor,
+              child: new AnimatedBuilder(
+                animation: _controller,
+                builder: (BuildContext context, Widget child) {
+                  return new Transform(
+                    transform:
+                    new Matrix4.rotationZ(_controller.value * 0.5 * 3.14),
+                    alignment: FractionalOffset.center,
+                    child: new Icon(_controller.isDismissed
+                        ? Icons.add
+                        : Icons.close_sharp),
+                  );
+                },
+              ),
+              onPressed: () {
+                if (_controller.isDismissed) {
+                  _controller.forward();
+                } else {
+                  _controller.reverse();
+                }
               },
             ),
-            onPressed: () {
-              if (_controller.isDismissed) {
-                _controller.forward();
-              } else {
-                _controller.reverse();
-              }
-            },
           ),
-        ),
       ),
     );
   }
-
-
 }

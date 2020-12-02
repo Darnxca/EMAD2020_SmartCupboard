@@ -11,6 +11,7 @@ import 'constants.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+
   runApp(MyApp());
 }
 
@@ -19,24 +20,24 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [
-        Provider<AuthenticationService>(
-          create: (_) => AuthenticationService(FirebaseAuth.instance),
-        ),
-        StreamProvider(
-          create: (context) => context.read<AuthenticationService>().authStateChanges,
-        )
-      ],
-    child: MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Auth',
-      theme: ThemeData(
-        primaryColor: kPrimaryColor,
-        scaffoldBackgroundColor: Colors.white,
-      ),
-      home: AuthenticationWrapper(),
-      //home: WelcomeScreen(),
-    ));
+        providers: [
+          Provider<AuthenticationService>(
+            create: (_) => AuthenticationService(FirebaseAuth.instance),
+          ),
+          StreamProvider(
+            create: (context) => context.read<AuthenticationService>().authStateChanges,
+          )
+        ],
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Flutter Auth',
+          theme: ThemeData(
+            primaryColor: kPrimaryColor,
+            scaffoldBackgroundColor: Colors.white,
+          ),
+          home: AuthenticationWrapper(),
+          //home: WelcomeScreen(),
+        ));
   }
 
 }

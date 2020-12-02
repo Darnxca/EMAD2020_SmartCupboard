@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:smart_cupboard/Screens/Aggiunta/aggiunta.dart';
 import 'package:smart_cupboard/Screens/HomePage/Components/MainDrawer.dart';
 import 'package:smart_cupboard/Screens/LaMiaDIspensa/components/body.dart';
-
 import '../../constants.dart';
-
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
 class MyDispensaScreen extends StatefulWidget  {
   State createState() => new MyDispensaScreenState();
@@ -14,6 +13,14 @@ class MyDispensaScreenState extends State<MyDispensaScreen> with TickerProviderS
   AnimationController _controller;
 
   static const List<IconData> icons = const [ Icons.qr_code, Icons.keyboard];
+
+  String codice;
+  Future getCodiceEan() async{
+    codice = await FlutterBarcodeScanner.scanBarcode("#004297", "Cancella", true,ScanMode.BARCODE);
+    setState(() {
+      print(codice);
+    });
+  }
 
   @override
   void initState() {
@@ -69,7 +76,7 @@ class MyDispensaScreenState extends State<MyDispensaScreen> with TickerProviderS
                       );
 
                   } else {
-
+                    getCodiceEan();
                   }
 
 

@@ -1,9 +1,17 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:path/path.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smart_cupboard/GetDataService.dart';
 import 'package:smart_cupboard/Screens/Aggiunta/aggiunta.dart';
 import 'package:smart_cupboard/Screens/HomePage/Components/MainDrawer.dart';
 import 'package:smart_cupboard/Screens/LaMiaDIspensa/components/body.dart';
+import 'package:smart_cupboard/Screens/temp/temp_screen.dart';
+import 'package:smart_cupboard/modal/Dispensa.dart';
+import 'package:smart_cupboard/modal/DispensaEntity.dart';
 import 'package:smart_cupboard/modal/Prodotto.dart';
+import 'package:sqflite/sqflite.dart';
 import '../../constants.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
@@ -16,23 +24,10 @@ class MyDispensaScreenState extends State<MyDispensaScreen>
   AnimationController _controller;
   Prodotto p;
   GetDataService service = GetDataService();
-
+  String dataSharedPreferences;
+  SharedPreferences prefs;
   static const List<IconData> icons = const [Icons.qr_code, Icons.keyboard];
-
   String codice;
-
-  Future getCodiceEan() async {
-    codice = await FlutterBarcodeScanner.scanBarcode(
-        "#004297", "Cancella", true, ScanMode.BARCODE);
-
-    setState(() {
-      print(codice);
-      service.getProdotti(codice);
-
-    });
-  }
-
-
 
   @override
   void initState() {
@@ -40,8 +35,16 @@ class MyDispensaScreenState extends State<MyDispensaScreen>
       vsync: this,
       duration: const Duration(milliseconds: 500),
     );
+  }
 
+  Future getCodiceEan() async {
+    return codice = await FlutterBarcodeScanner.scanBarcode(
+        "#004297", "Cancella", true, ScanMode.BARCODE);
 
+    /*setState(() {
+      print(codice);
+      service.getProdotti(codice);
+    });*/
   }
 
   Widget build(BuildContext context) {
@@ -78,12 +81,15 @@ class MyDispensaScreenState extends State<MyDispensaScreen>
                       context,
                       MaterialPageRoute(
                         builder: (context) {
-                          return AggiuntaProdotto();
+                          //return AggiuntaProdotto();
+                          return tempScreen();
                         },
                       ),
                     );
                   } else {
-                    getCodiceEan();
+                    getCodiceEan().then((value) {
+                      service.getProdottiFromFirebase(value);
+                    });
                   }
                 },
               ),
@@ -100,7 +106,7 @@ class MyDispensaScreenState extends State<MyDispensaScreen>
                 builder: (BuildContext context, Widget child) {
                   return new Transform(
                     transform:
-                    new Matrix4.rotationZ(_controller.value * 0.5 * 3.14),
+                        new Matrix4.rotationZ(_controller.value * 0.5 * 3.14),
                     alignment: FractionalOffset.center,
                     child: new Icon(_controller.isDismissed
                         ? Icons.add

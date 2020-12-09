@@ -22,7 +22,7 @@ class _BodyExpansionPanelState extends State<BodyExpansionPanel> {
   List<Item> _books = generateItems();
   String data ;
 
-  getShared() async{
+  Future<String> getShared() async{
     //await UserPreferences().init();
     // dataSharedPreferences = UserPreferences().data;
     SharedPreferences prefs = await SharedPreferences.getInstance() ;
@@ -38,19 +38,13 @@ class _BodyExpansionPanelState extends State<BodyExpansionPanel> {
       //dispensa = Dispensa.fromJson(jsonDecode(dataSharedPreferences));
     }
 
-    setState(() {
-      data = dataSharedPreferences;
-    });
-
-
+    return dataSharedPreferences;
   }
 
   @override
-  void initState() {
-    getShared();
+  void initState(){
 
-    print(data);
-
+    getShared().then((value) => data = value);
 
   }
 
@@ -162,6 +156,7 @@ class Prodotti {
 }
 
 List<Item> generateItems()  {
+
   List<Item> listItems = [];
   List<Prodotti> listProdotti = [];
   List<dynamic> responseList = CATEGORY_DATA;

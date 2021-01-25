@@ -81,9 +81,9 @@ class GetDataService {
         categoryName: categorie[i]['categoria'],
         expandedValue: 'Details for Book  goes where',
         prodottiDipensa: listProdotti,
-        urlImg: "carne.jpg",
+        urlImg: categorie[i]['categoria'].toLowerCase()+".png",
       ));
-      print(listProdotti[0].name);
+      print(categorie[i]['categoria'].toLowerCase().replaceAll(new RegExp(r"\s+"), "")+".png");
     }
 
 

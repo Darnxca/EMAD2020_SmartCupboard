@@ -27,7 +27,7 @@ class CategoriesScroller extends StatelessWidget {
                   height: 150,
                   decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: AssetImage("assets/images/farine_e_derivati.jpg"),
+                        image: AssetImage("assets/images/imgCategorie/farine&derivati.png"),
                         fit: BoxFit.cover,
                       ),
                       borderRadius: BorderRadius.all(Radius.circular(20.0))),
@@ -67,7 +67,7 @@ class CategoriesScroller extends StatelessWidget {
                 height: 150,
                 decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage("assets/images/carne.jpg"),
+                      image: AssetImage("assets/images/imgCategorie/carne.png"),
                       fit: BoxFit.cover,
                     ),
                     borderRadius: BorderRadius.all(Radius.circular(20.0))),
@@ -96,7 +96,7 @@ class CategoriesScroller extends StatelessWidget {
                 height: 150,
                 decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage("assets/images/verdure.jpg"),
+                      image: AssetImage("assets/images/imgCategorie/frutta.png"),
                       fit: BoxFit.cover,
                     ),
                     borderRadius: BorderRadius.all(Radius.circular(20.0))),
@@ -108,7 +108,7 @@ class CategoriesScroller extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
                       Text(
-                        "Verdure",
+                        "Frutta",
                         style: TextStyle(
                             fontSize: 18,
                             color: Black,

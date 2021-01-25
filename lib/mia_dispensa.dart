@@ -9,7 +9,7 @@ const CATEGORY_DATA = [
   },
   {
     "name": "farine e derivati",
-    "image": "farine_e_derivati.jpg",
+    "image": "farine & derivati.jpg",
     "prodotti": [
       {"name": "pasta2"}
     ]

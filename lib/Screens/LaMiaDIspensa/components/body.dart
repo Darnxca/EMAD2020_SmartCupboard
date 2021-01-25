@@ -58,7 +58,7 @@ class _BodyExpansionPanelState extends State<BodyExpansionPanel> {
                   return Container(
                     decoration: BoxDecoration(
                         image: DecorationImage(
-                          image: AssetImage("assets/images/" + item.urlImg),
+                          image: AssetImage("assets/images/imgCategorie/" + item.urlImg),
                           fit: BoxFit.cover,
                         ),
                         borderRadius: BorderRadius.all(Radius.circular(20.0))),

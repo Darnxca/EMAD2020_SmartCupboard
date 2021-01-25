@@ -1,6 +1,8 @@
 import 'package:firebase_database/firebase_database.dart';
+import 'package:smart_cupboard/item.dart';
 import 'package:smart_cupboard/modal/Dispensa.dart';
 import 'package:sqflite/sqflite.dart';
+import 'Prodotti.dart';
 import 'SingletonDatabaseConnection.dart';
 import 'modal/DispensaEntity.dart';
 
@@ -52,5 +54,39 @@ class GetDataService {
         maps[i]['categoria'],
       );
     });
+  }
+
+  Future<List<Item>> getDispensa2() async {
+    Database db = await SingletonDatabaseConnection.instance.database;
+
+    final List<Map<String, dynamic>> categorie =
+        await db.rawQuery('SELECT DISTINCT categoria FROM Dispensa');
+
+    final List<Map<String, dynamic>> prodotti =
+        await db.rawQuery('SELECT * FROM Dispensa ORDER BY categoria');
+
+
+    List<Item> items=[];
+
+
+    for (int i = 0; i < categorie.length; i++) {
+      List<Prodotti> listProdotti = [];
+
+      for (int j = 0; j < prodotti.length; j++) {
+        if (prodotti[j]['categoria'] == categorie[i]['categoria']) {
+         listProdotti.add(new Prodotti(name: prodotti[j]['nome']));
+        }
+      }
+      items.add(new Item(
+        categoryName: categorie[i]['categoria'],
+        expandedValue: 'Details for Book  goes where',
+        prodottiDipensa: listProdotti,
+        urlImg: "carne.jpg",
+      ));
+      print(listProdotti[0].name);
+    }
+
+
+    return items;
   }
 }

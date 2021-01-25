@@ -46,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Container(
         child: FutureBuilder(
-          future: getDataService.getDispensa(),
+          future: getDataService.getDispensa2(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             print(" DATI " + snapshot.data.toString());
             if (snapshot.hasError) {

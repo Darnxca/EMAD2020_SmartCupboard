@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:smart_cupboard/GetDataService.dart';
+import 'package:smart_cupboard/modal/ListaSpesaEntity.dart';
 import '../../../constants.dart';
 import 'package:smart_cupboard/item.dart';
 
@@ -101,9 +102,22 @@ class _BodyExpansionPanelState extends State<BodyExpansionPanel> {
                                   fontWeight: FontWeight.bold),
                             ),
                             Spacer(),
-                            Icon(Icons.add_shopping_cart),
+                            IconButton(
+                              icon: Icon(Icons.add_shopping_cart),
+                              tooltip: "Prodotto aggiunto alla lista della spesa",
+                              onPressed: () {
+                                getDataService.inserisciProdottoListaSpesa(ListaSpesaEntity( item.prodottiDipensa[index].EAN, item.prodottiDipensa[index].name));
+                              },
+                            
+                            ),
                             Spacer(),
-                            Icon(Icons.restore_from_trash),
+                            IconButton(
+                              icon: Icon(Icons.restore_from_trash),
+                              tooltip: "Prodotto rimosso dalla dispensa",
+                              onPressed: () {
+                                getDataService.cancella( item.prodottiDipensa[index].EAN);
+                              },
+                            ),
                           ],
                         ),
                       );

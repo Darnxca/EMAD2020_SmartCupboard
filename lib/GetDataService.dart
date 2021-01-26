@@ -1,6 +1,6 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:smart_cupboard/item.dart';
-import 'package:smart_cupboard/modal/Dispensa.dart';
+import 'package:smart_cupboard/modal/ListaSpesaEntity.dart';
 import 'package:sqflite/sqflite.dart';
 import 'Prodotti.dart';
 import 'SingletonDatabaseConnection.dart';
@@ -9,7 +9,6 @@ import 'modal/DispensaEntity.dart';
 class GetDataService {
   DatabaseReference dbRef;
   DispensaEntity result;
-  Dispensa dispensa;
   Future<Database> database;
 
   GetDataService() {}
@@ -74,7 +73,7 @@ class GetDataService {
 
       for (int j = 0; j < prodotti.length; j++) {
         if (prodotti[j]['categoria'] == categorie[i]['categoria']) {
-         listProdotti.add(new Prodotti(name: prodotti[j]['nome']));
+         listProdotti.add(new Prodotti(EAN: prodotti[j]["key_EAN"],name: prodotti[j]['nome']));
         }
       }
       items.add(new Item(
@@ -88,5 +87,73 @@ class GetDataService {
 
 
     return items;
+  }
+
+
+  Future<List<Item>> inserisciProdotto(DispensaEntity d) async {
+    Database db = await SingletonDatabaseConnection.instance.database;
+
+    await db.insert(
+      'Dispensa',
+      d.toMap(),
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+  }
+
+  Future<List<DispensaEntity>> getAllProduct() async {
+
+    List<DispensaEntity> allProduct = [];
+    dbRef = (await FirebaseDatabase.instance
+        .reference()
+        .child("Prodotti" ));
+
+    dbRef.once().then((DataSnapshot snapshot) {
+      try {
+        Map<dynamic, dynamic> values = snapshot.value;
+        values.forEach((key,values) {
+          result = DispensaEntity(key, values["nome"], values["categoria"]);
+          print("FIREBASE: " + result.toString());
+          allProduct.add(result);
+        });
+        return allProduct;
+      } on NoSuchMethodError catch (e) {
+        print("Prodotto non trovato");
+        return allProduct;
+      }
+    });
+
+
+  }
+
+
+  Future<List<Item>> inserisciProdottoListaSpesa(ListaSpesaEntity d) async {
+    Database db = await SingletonDatabaseConnection.instance.database;
+
+    await db.insert(
+      'ListaSpesa',
+      d.toMap(),
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+
+    final List<Map<String, dynamic>> categorie =  await db.rawQuery('SELECT * FROM ListaSpesa');
+
+    categorie.forEach((element) {
+      print(element.toString());
+    });
+
+
+  }
+
+  Future<void> cancella(String ean) async {
+    Database db = await SingletonDatabaseConnection.instance.database;
+
+    await db.delete('Dispensa', where: 'key_EAN = ?' , whereArgs: [ean]);
+
+
+    final List<Map<String, dynamic>> categorie =  await db.rawQuery('SELECT * FROM Dispensa');
+
+    categorie.forEach((element) {
+      print(element.toString());
+    });
   }
 }

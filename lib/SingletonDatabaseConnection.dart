@@ -20,13 +20,15 @@ class SingletonDatabaseConnection {
     _database = openDatabase(
       join(await getDatabasesPath(), 'dispensa_database.db'),
       onCreate: (db, version) {
-        return db.execute(
-          "CREATE TABLE Dispensa(key_EAN TEXT PRIMARY KEY, nome TEXT, categoria TEXT)",
-        );
+        _createDb(db);
       },
       version: 1,
     );
-
     return _database;
+  }
+
+  static void _createDb(Database db) {
+    db.execute('CREATE TABLE Dispensa(key_EAN TEXT PRIMARY KEY, nome TEXT, categoria TEXT)');
+    db.execute('CREATE TABLE ListaSpesa(key_EAN TEXT PRIMARY KEY, nome TEXT)');
   }
 }

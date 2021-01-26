@@ -1,10 +1,4 @@
 
-
-import 'dart:async';
-
-import 'package:path/path.dart';
-import 'package:sqflite/sqflite.dart';
-
 class DispensaEntity{
 
   final String key_EAN;
@@ -25,5 +19,4 @@ class DispensaEntity{
   String toString() {
     return 'DispensaEntity{key_EAN: $key_EAN, nome: $nome, categoria: $categoria}';
   }
-
 }

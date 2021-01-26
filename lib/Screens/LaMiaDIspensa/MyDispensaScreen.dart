@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smart_cupboard/GetDataService.dart';
+import 'package:smart_cupboard/Screens/Aggiunta/aggiunta.dart';
 import 'package:smart_cupboard/Screens/HomePage/Components/MainDrawer.dart';
 import 'package:smart_cupboard/Screens/LaMiaDIspensa/components/body.dart';
 import 'package:smart_cupboard/Screens/temp/temp_screen.dart';
@@ -32,9 +33,8 @@ class MyDispensaScreenState extends State<MyDispensaScreen>
   }
 
   Future getCodiceEan() async {
-    return codice = await FlutterBarcodeScanner.scanBarcode(
+     return codice = await FlutterBarcodeScanner.scanBarcode(
         "#004297", "Cancella", true, ScanMode.BARCODE);
-
     /*setState(() {
       print(codice);
       service.getProdotti(codice);
@@ -75,8 +75,8 @@ class MyDispensaScreenState extends State<MyDispensaScreen>
                       context,
                       MaterialPageRoute(
                         builder: (context) {
-                          //return AggiuntaProdotto();
-                          return tempScreen();
+                          return AggiuntaProdotto();
+                          //return tempScreen();
                         },
                       ),
                     );

@@ -144,7 +144,7 @@ class GetDataService {
 
   }
 
-  Future<void> cancella(String ean) async {
+  Future<void> cancellaProdottoDallaDispensa(String ean) async {
     Database db = await SingletonDatabaseConnection.instance.database;
 
     await db.delete('Dispensa', where: 'key_EAN = ?' , whereArgs: [ean]);

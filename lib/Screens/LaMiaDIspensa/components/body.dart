@@ -115,7 +115,7 @@ class _BodyExpansionPanelState extends State<BodyExpansionPanel> {
                               icon: Icon(Icons.restore_from_trash),
                               tooltip: "Prodotto rimosso dalla dispensa",
                               onPressed: () {
-                                getDataService.cancella( item.prodottiDipensa[index].EAN);
+                                getDataService.cancellaProdottoDallaDispensa( item.prodottiDipensa[index].EAN);
                               },
                             ),
                           ],

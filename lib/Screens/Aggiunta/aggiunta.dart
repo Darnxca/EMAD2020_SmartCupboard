@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:smart_cupboard/Screens/LaMiaDIspensa/MyDispensaScreen.dart';
 import 'package:smart_cupboard/components/rounded_button.dart';
 import 'package:smart_cupboard/components/rounded_input_field.dart';
 import 'package:smart_cupboard/GetDataService.dart';
 import 'package:smart_cupboard/item.dart';
 import 'package:smart_cupboard/modal/DispensaEntity.dart';
+import 'package:smart_cupboard/modal/ListaSpesaEntity.dart';
 import '../../constants.dart';
 
 class AggiuntaProdotto extends StatefulWidget {
@@ -135,9 +137,35 @@ class _AggiuntaProdottoState extends State<AggiuntaProdotto> {
                                   fontWeight: FontWeight.bold),
                             ),
                             Spacer(),
-                            Icon(Icons.add_shopping_cart),
+                            IconButton(
+                              icon: Icon(Icons.add_shopping_cart),
+                              tooltip: "Prodotto aggiunto alla lista della spesa",
+                              onPressed: () {
+                                getDataService.inserisciProdottoListaSpesa(ListaSpesaEntity( item.prodottiDipensa[index].EAN, item.prodottiDipensa[index].name)).then((value) {
+                                  Scaffold.of(context).showSnackBar(SnackBar(
+                                    content: Text("Prodotto aggiunto alla lista della spesa"),
+                                  ));
+                                });
+                              },
+
+                            ),
                             Spacer(),
-                            Icon(Icons.restore_from_trash),
+                            IconButton(
+                              icon: Icon(Icons.restore_from_trash),
+                              tooltip: "Prodotto rimosso dalla dispensa",
+                              onPressed: () {
+                                getDataService.cancellaProdottoDallaDispensa( item.prodottiDipensa[index].EAN).then((value) {
+                                  Navigator.pop(context);
+                                  Navigator.push(context, MaterialPageRoute(
+                                    builder: (context) {
+                                      return AggiuntaProdotto();
+                                      //return tempScreen();
+                                    },
+                                  ),
+                                  );
+                                });
+                              },
+                            ),
                           ],
                         ),
                       );
@@ -236,7 +264,17 @@ void _settingModalBottomSheet(context) {
                 text: "Aggiungi alla lista",
                 press: (){
                   DispensaEntity d = DispensaEntity(DateTime.now().millisecondsSinceEpoch.toString(), nomeProdotto, dropdownValue);
-                  service.inserisciProdotto(d).then((value) => Navigator.pop(context));
+                  service.inserisciProdotto(d).then((value) {
+                    Navigator.pop(context);
+                    Navigator.pop(context);
+                    Navigator.push(context, MaterialPageRoute(
+                      builder: (context) {
+                        return MyDispensaScreen();
+                        //return tempScreen();
+                      },
+                    ),
+                    );
+                  });
                 },
               ),
             ],

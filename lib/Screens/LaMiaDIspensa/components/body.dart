@@ -5,6 +5,8 @@ import 'package:smart_cupboard/modal/ListaSpesaEntity.dart';
 import '../../../constants.dart';
 import 'package:smart_cupboard/item.dart';
 
+import '../MyDispensaScreen.dart';
+
 class BodyExpansionPanel extends StatefulWidget {
   BodyExpansionPanel({Key key}) : super(key: key);
 
@@ -106,7 +108,16 @@ class _BodyExpansionPanelState extends State<BodyExpansionPanel> {
                               icon: Icon(Icons.add_shopping_cart),
                               tooltip: "Prodotto aggiunto alla lista della spesa",
                               onPressed: () {
-                                getDataService.inserisciProdottoListaSpesa(ListaSpesaEntity( item.prodottiDipensa[index].EAN, item.prodottiDipensa[index].name));
+                                getDataService.inserisciProdottoListaSpesa(ListaSpesaEntity( item.prodottiDipensa[index].EAN, item.prodottiDipensa[index].name)).then((value) {
+                                  Navigator.pop(context);
+                                  Navigator.push(context, MaterialPageRoute(
+                                    builder: (context) {
+                                      return MyDispensaScreen();
+                                      //return tempScreen();
+                                    },
+                                  ),
+                                  );
+                                });
                               },
                             
                             ),
@@ -115,7 +126,16 @@ class _BodyExpansionPanelState extends State<BodyExpansionPanel> {
                               icon: Icon(Icons.restore_from_trash),
                               tooltip: "Prodotto rimosso dalla dispensa",
                               onPressed: () {
-                                getDataService.cancellaProdottoDallaDispensa( item.prodottiDipensa[index].EAN);
+                                getDataService.cancellaProdottoDallaDispensa( item.prodottiDipensa[index].EAN).then((value) {
+                                  Navigator.pop(context);
+                                  Navigator.push(context, MaterialPageRoute(
+                                    builder: (context) {
+                                      return MyDispensaScreen();
+                                      //return tempScreen();
+                                    },
+                                  ),
+                                  );
+                                });
                               },
                             ),
                           ],

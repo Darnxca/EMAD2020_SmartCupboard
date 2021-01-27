@@ -156,4 +156,34 @@ class GetDataService {
       print(element.toString());
     });
   }
+
+
+  Future<List<Prodotti>> getListaSpesa() async{
+    Database db = await SingletonDatabaseConnection.instance.database;
+
+    final List<Map<String, dynamic>> lista = await db.rawQuery('SELECT * FROM ListaSpesa');
+
+    List<Prodotti> listaSpesa=[];
+
+    for(int i =0 ; i< lista.length;i++){
+      listaSpesa.add(new Prodotti(name: lista[i]["nome"],EAN :lista[i]["key_EAN"]));
+      print(listaSpesa[i].toString());
+    }
+    return listaSpesa;
+  }
+
+  Future<void> removeProductFromListaSpesa(String Ean) async{
+    Database db = await SingletonDatabaseConnection.instance.database;
+
+    await db.delete('ListaSpesa', where: 'key_EAN = ?' , whereArgs: [Ean]);
+  }
+
+
+  Future <void> removeAllFromListaSpesa() async{
+    Database db = await SingletonDatabaseConnection.instance.database;
+
+    await db.delete('ListaSpesa');
+  }
+
+
 }

@@ -37,15 +37,23 @@ class CategoriesScroller extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.end,
+
                       children: <Widget>[
-                        Text(
+                      Center(child:Container(
+                        padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
+                        child: Text(
                           "Farine e derivati",
                           style: TextStyle(
                               fontSize: 18,
                               color: Black,
-                              backgroundColor: Colors.grey[350],
+                              background: Paint()..color = Colors.grey[350].withOpacity(0.85)
+                             ..strokeWidth = 25
+                              ..style = PaintingStyle.stroke,
+                              //backgroundColor: Colors.grey[350].withOpacity(0.7)..strokeWidth= 16.5,
                               fontWeight: FontWeight.bold),
                         ),
+                        ),
+                      ),
                       ],
                     ),
                   ),
@@ -83,7 +91,10 @@ class CategoriesScroller extends StatelessWidget {
                         style: TextStyle(
                             fontSize: 18,
                             color: Black,
-                            backgroundColor: Colors.grey[350],
+                            background: Paint()..color = Colors.grey[350].withOpacity(0.85)
+                              ..strokeWidth = 25
+                              ..style = PaintingStyle.stroke,
+                            //backgroundColor: Colors.grey[350].withOpacity(0.7)..strokeWidth= 16.5,
                             fontWeight: FontWeight.bold),
                       ),
                     ],
@@ -112,7 +123,10 @@ class CategoriesScroller extends StatelessWidget {
                         style: TextStyle(
                             fontSize: 18,
                             color: Black,
-                            backgroundColor: Colors.grey[350],
+                            background: Paint()..color = Colors.grey[350].withOpacity(0.85)
+                              ..strokeWidth = 25
+                              ..style = PaintingStyle.stroke,
+                            //backgroundColor: Colors.grey[350].withOpacity(0.7)..strokeWidth= 16.5,
                             fontWeight: FontWeight.bold),
                       ),
                     ],

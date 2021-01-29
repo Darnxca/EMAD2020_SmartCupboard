@@ -4,21 +4,21 @@ const CATEGORY_DATA = [
     "image": "carne.jpg",
     "prodotti": [
       {"name": "carne"},
-      {"name": "pollo"}
+      {"name": "Scottona"}
     ]
   },
   {
     "name": "farine e derivati",
     "image": "farine & derivati.jpg",
     "prodotti": [
-      {"name": "pasta2"}
+      {"name": "Spaghetti"}
     ]
   },
   {
-    "name": "maionese",
-    "image": "maionese.jpg",
+    "name": "Frutta & Verdura",
+    "image": "verdure.jpg",
     "prodotti": [
-      {"name": "pasta"}
+      {"name": "Broccoli"}
     ]
   },
 ];

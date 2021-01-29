@@ -7,29 +7,39 @@ const White = Color(0xFFffffff);
 const Black = Color(0xFF000000);
 
 
-const FOOD_DATA = [
+const FOOD_DATA1 = [
   {
-    "name":"Pollo alla cacciatora",
+    "name":"Pollo                            ",
     "difficolta":"Media",
     "image":"pollo_alla_cacciatora.jpg"
   },
   {
-    "name":"Maionese                  ",
+    "name":"Maionese                   ",
     "difficolta":"Facile",
     "image":"maionese.jpg"
   },
   {
-    "name":"Pollo alla cacciatora",
+    "name":"Banane                       ",
     "difficolta":"Media",
     "image":"pollo_alla_cacciatora.jpg"
   },
   {
-    "name":"Pollo alla cacciatora",
+    "name":"Farina 00                   ",
     "difficolta":"Media",
     "image":"pollo_alla_cacciatora.jpg"
   },
   {
-    "name":"Pollo alla cacciatora",
+    "name":"Cioccolata fondente",
+    "difficolta":"Media",
+    "image":"pollo_alla_cacciatora.jpg"
+  },
+  {
+    "name":"Pane di semola        ",
+    "difficolta":"Media",
+    "image":"pollo_alla_cacciatora.jpg"
+  },
+  {
+    "name":"Succo ACE                 ",
     "difficolta":"Media",
     "image":"pollo_alla_cacciatora.jpg"
   },

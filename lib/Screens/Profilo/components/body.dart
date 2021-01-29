@@ -8,6 +8,7 @@ import 'package:smart_cupboard/components/already_have_an_account_acheck.dart';
 import 'package:smart_cupboard/components/rounded_button.dart';
 import 'package:smart_cupboard/components/rounded_input_field.dart';
 import 'package:smart_cupboard/components/rounded_password_field.dart';
+import 'package:smart_cupboard/constants.dart';
 
 
 class Body extends StatelessWidget {
@@ -27,7 +28,7 @@ class Body extends StatelessWidget {
             Icon(Icons.person_outline_rounded, size: 150),
               Padding(
                 padding: const EdgeInsets.only(
-                    left: 50, top: 30, right: 0, bottom: 0),
+                    left: 20, top: 30, right: 0, bottom: 0),
                 child: Container(
 
                   child: Row(
@@ -42,11 +43,11 @@ class Body extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 28, vertical: 0),
-                        width: 250.0,
+                        margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                        width: 275.0,
                         child: Padding(
                           padding: const EdgeInsets.only(
-                              left: 10, top: 5, right: 0, bottom: 0),
+                              left: 30, top: 5, right: 0, bottom: 0),
                           child: TextField(
                             textAlign: TextAlign.center,
                             decoration: new InputDecoration(
@@ -72,7 +73,7 @@ class Body extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.only(
-                    left: 50, top: 30, right: 0, bottom: 0),
+                    left: 20, top: 30, right: 0, bottom: 0),
                 child: Container(
 
                     child: Row(
@@ -88,7 +89,7 @@ class Body extends StatelessWidget {
                         ),
                         Container(
                           margin: const EdgeInsets.symmetric(horizontal: 2, vertical: 0),
-                          width: 250.0,
+                          width: 240.0,
                           child: Padding(
                             padding: const EdgeInsets.only(
                                 left: 0, top: 5, right: 0, bottom: 0),
@@ -117,7 +118,7 @@ class Body extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.only(
-                    left: 50, top: 30, right: 0, bottom: 0),
+                    left: 20, top: 30, right: 0, bottom: 0),
                 child: Container(
 
                     child: Row(
@@ -132,11 +133,11 @@ class Body extends StatelessWidget {
                           ),
                         ),
                         Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
-                          width: 270.0,
+                          margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                          width: 280.0,
                           child: Padding(
                             padding: const EdgeInsets.only(
-                                left: 20, top: 5, right: 0, bottom: 0),
+                                left: 40, top: 5, right: 0, bottom: 0),
                             child: TextField(
                               textAlign: TextAlign.center,
                               decoration: new InputDecoration(
@@ -162,7 +163,7 @@ class Body extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.only(
-                    left: 50, top: 30, right: 0, bottom: 0),
+                    left: 20, top: 30, right: 0, bottom: 0),
                 child: Container(
 
                     child: Row(
@@ -178,7 +179,7 @@ class Body extends StatelessWidget {
                         ),
                         Container(
                           margin: const EdgeInsets.symmetric(horizontal: 2, vertical: 0),
-                          width: 250.0,
+                          width: 238.0,
                           child: Padding(
                             padding: const EdgeInsets.only(
                                 left: 0, top: 5, right: 0, bottom: 0),
@@ -207,7 +208,7 @@ class Body extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.only(
-                    left: 50, top: 30, right: 0, bottom: 0),
+                    left: 20, top: 30, right: 0, bottom: 0),
                 child: Container(
 
                     child: Row(
@@ -222,11 +223,11 @@ class Body extends StatelessWidget {
                           ),
                         ),
                         Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 21, vertical: 0),
-                          width: 250.0,
+                          margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                          width: 260.0,
                           child: Padding(
                             padding: const EdgeInsets.only(
-                                left: 0, top: 5, right: 0, bottom: 0),
+                                left: 21, top: 5, right: 0, bottom: 0),
                             child: TextField(
                               textAlign: TextAlign.center,
                               decoration: new InputDecoration(
@@ -253,11 +254,21 @@ class Body extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(
                     left: 0, top: 30, right: 0, bottom: 0),
-                child: RoundedButton(
-                  text: "Salva modifiche",
-                  press: () {},
+                child: ButtonTheme(
+                  minWidth: 250.0,
+                  height: 60.0,
+                  child: RaisedButton(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(29.0),
+                        side: BorderSide(color: kPrimaryColor)),
+                    onPressed: () {},
+                    color: kPrimaryColor,
+                    textColor: Colors.white,
+                    child: Text("Salva Modifiche".toUpperCase(),
+                        style: TextStyle(fontSize: 14)),
+                  ),
                 ),
-              ),
+                ),
             ],
           )
 

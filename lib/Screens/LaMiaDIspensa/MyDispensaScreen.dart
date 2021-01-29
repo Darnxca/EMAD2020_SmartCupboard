@@ -69,11 +69,11 @@ class MyDispensaScreenState extends State<MyDispensaScreen>
                 child: new Icon(icons[index], color: foregroundColor),
                 onPressed: () {
                   if (index == 1) {
+                    Navigator.pop(context);
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) {
-                          Navigator.pop(context);
                           return AggiuntaProdotto();
                           //return tempScreen();
                         },

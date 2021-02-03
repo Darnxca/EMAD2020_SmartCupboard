@@ -5,10 +5,12 @@ import 'package:sqflite/sqflite.dart';
 import 'Prodotti.dart';
 import 'SingletonDatabaseConnection.dart';
 import 'modal/DispensaEntity.dart';
+import 'modal/Ricetta.dart';
 
 class GetDataService {
   DatabaseReference dbRef;
   DispensaEntity result;
+  Ricetta ricetta;
   Future<Database> database;
 
   GetDataService() {}
@@ -121,10 +123,30 @@ class GetDataService {
         return allProduct;
       }
     });
-
-
   }
 
+  // ignore: missing_return
+  Future<List<Ricetta>> gellAllRicette() async {
+    List<Ricetta> allRicette = [];
+    await FirebaseDatabase.instance
+        .reference()
+        .child("Ricette")
+        .once()
+        .then((DataSnapshot snapshot) {
+      Map<dynamic, dynamic> values = snapshot.value;
+      values.forEach((key, values) {
+        List<String> ingredienti = [];
+        ingredienti.add("pollo");
+        ricetta = Ricetta(values["NomeRicetta"], values["Difficolta"],
+            values["Procedimento"], values["urlImg"], ingredienti);
+        // print("FIREBASE: " + ricetta.toString());
+        allRicette.add(ricetta);
+      });
+
+       allRicette.forEach((element) {print(element.toString());});
+    });
+    return allRicette;
+  }
 
   Future<List<Item>> inserisciProdottoListaSpesa(ListaSpesaEntity d) async {
     Database db = await SingletonDatabaseConnection.instance.database;
@@ -184,6 +206,8 @@ class GetDataService {
 
     await db.delete('ListaSpesa');
   }
+
+
 
 
 }

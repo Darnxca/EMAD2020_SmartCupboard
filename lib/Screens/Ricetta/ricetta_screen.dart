@@ -1,9 +1,15 @@
-
 import 'package:flutter/material.dart';
+import 'package:smart_cupboard/modal/Ricetta.dart';
 
 class Ricetta_Screen extends StatelessWidget {
   @override
+  Ricetta ricetta;
+
+  Ricetta_Screen({Key key, @required this.ricetta}) : super(key: key);
+
   Widget build(BuildContext context) {
+    print("Ricetta");
+    print(ricetta.toString());
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
@@ -15,9 +21,9 @@ class Ricetta_Screen extends StatelessWidget {
             Hero(
               child: Container(
                 height: size.height * 0.55,
-                child: Image.asset(
-                  'assets/images/pollo_alla_cacciatora.jpg',
-                  fit: BoxFit.fill                  ,
+                child: Image.network(
+                  ricetta.urlImg,
+                  fit: BoxFit.fill,
                 ),
               ),
               tag: "image",
@@ -41,17 +47,17 @@ class Ricetta_Screen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                            Text(
-                              "Pollo alla cacciatora",
-                              style: TextStyle(
-                                  fontSize: 22, fontWeight: FontWeight.bold),
-                            ),
+                        Text(
+                          ricetta.nomeRicetta,
+                          style: TextStyle(
+                              fontSize: 22, fontWeight: FontWeight.bold),
+                        ),
 
                         SizedBox(
                           height: 5,
                         ),
                         Text(
-                          "Difficoltà: media",
+                          "Difficoltà: " + ricetta.difficolta,
                           style: TextStyle(
                               fontSize: 15, fontWeight: FontWeight.normal),
                         ),
@@ -61,49 +67,32 @@ class Ricetta_Screen extends StatelessWidget {
 
                         ///Container for food information
 
-
                         Text(
                           "Ingredienti",
                           style: TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold),
                         ),
 
-                        SizedBox(
-                          height: 4,
-                        ),
-
-                        ListTile(
-                          leading: Icon(Icons.arrow_right),
-                          title: Text(
-                            '600gr di Pollo',
-                            style: TextStyle(
-                              fontSize: 18,
-                            ),
-                          ),
-                          onTap: null,
-                        ),
-
-                        ListTile(
-                          leading: Icon(Icons.arrow_right),
-                          title: Text(
-                            '2 Cipolle medi',
-                            style: TextStyle(
-                              fontSize: 18,
-                            ),
-                          ),
-                          onTap: null,
-                        ),
-
-                        ListTile(
-                          leading: Icon(Icons.arrow_right),
-                          title: Text(
-                            'Pomodori',
-                            style: TextStyle(
-                              fontSize: 18,
-                            ),
-                          ),
-                          onTap: null,
-                        ),
+                        new Row(children: <Widget>[
+                          Expanded(
+                              child: SizedBox(
+                            height: 150,
+                            child: new ListView.builder(
+                                itemCount: ricetta.ingredienti.length,
+                                itemBuilder: (context, index) {
+                                  return ListTile(
+                                    leading: Icon(Icons.arrow_right),
+                                    title: Text(
+                                      ricetta.ingredienti[index],
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                      ),
+                                    ),
+                                    onTap: null,
+                                  );
+                                }),
+                          )),
+                        ]),
 
                         SizedBox(
                           height: 24,
@@ -120,7 +109,7 @@ class Ricetta_Screen extends StatelessWidget {
                         ),
 
                         Text(
-                          "Per preparare il pollo alla cacciatora cominciate dal taglio delle verdure. Dopo aver mondato la cipolla, sbucciate anche la carota e spuntatela, infine togliete il ciuffo dal sedano e tritate il tutto fino ad ottenere dei dadini di 2-3 mm 1. Poi passate alla pulizia del pollo. Tagliatelo in pezzi separando cosce, petto e alette 2. A questo punto avete tutto quello che vi occorre, spostatevi ai fornelli. In una casseruola mettete a scaldare un goccio d’olio, non esagerate perché la pelle del pollo rilascerà molto grasso. Accendete la fiamma e lasciate scaldare qualche istante, dopodiché versate i pezzi di pollo, cominciando sempre dal lato della pelle ",
+                          ricetta.procedimento,
                           style: TextStyle(
                               fontWeight: FontWeight.w300, color: Colors.grey),
                         ),

@@ -7,6 +7,7 @@ import 'SingletonDatabaseConnection.dart';
 import 'modal/DispensaEntity.dart';
 import 'modal/Ricetta.dart';
 
+
 class GetDataService {
   DatabaseReference dbRef;
   DispensaEntity result;
@@ -136,15 +137,15 @@ class GetDataService {
       Map<dynamic, dynamic> values = snapshot.value;
       values.forEach((key, values) {
         List<String> ingredienti = [];
-        ingredienti.add("pollo");
+        Map<dynamic,dynamic> i = values["Ingredienti"];
+        i.forEach((key, value) {
+          ingredienti.add(value);
+        });
         ricetta = Ricetta(values["NomeRicetta"], values["Difficolta"],
             values["Procedimento"], values["urlImg"], ingredienti);
-        // print("FIREBASE: " + ricetta.toString());
         allRicette.add(ricetta);
       });
-
-       allRicette.forEach((element) {print(element.toString());});
-    });
+        });
     return allRicette;
   }
 
@@ -206,8 +207,5 @@ class GetDataService {
 
     await db.delete('ListaSpesa');
   }
-
-
-
 
 }

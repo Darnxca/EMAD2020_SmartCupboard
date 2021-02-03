@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:smart_cupboard/GetDataService.dart';
 import 'package:smart_cupboard/Screens/HomePage/Components/MainDrawer.dart';
 import 'package:smart_cupboard/Screens/Ricetta/ricetta_screen.dart';
-import 'package:smart_cupboard/modal/Ricetta.dart';
-
-import '../../constants.dart';
 import 'Components/CategoriesScroller.dart';
 
 class HomePage extends StatefulWidget {
@@ -18,7 +15,6 @@ class _MyHomePageState extends State<HomePage> {
   bool closeTopContainer = false;
   double topContainer = 0;
 
-  Future<List<Ricetta>> _getData;
   GetDataService getDataService = GetDataService();
 
   List<Widget> itemsData = [];
@@ -141,7 +137,7 @@ class _MyHomePageState extends State<HomePage> {
                                                               top: 0.0,
                                                               bottom: 0.0),
                                                       child: Image.network(
-                                                          "https://www.cucchiaio.it/content/cucchiaio/it/ricette/2009/12/ricetta-pollo-cacciatora/jcr:content/imagePreview.img10.jpg/1579164215206.jpg",
+                                                              snapshot.data[index].urlImg,
                                                           height: 100,
                                                           width: 120)),
                                                   Column(
@@ -177,14 +173,14 @@ class _MyHomePageState extends State<HomePage> {
                                             context,
                                             MaterialPageRoute(
                                               builder: (context) {
-                                                return Ricetta_Screen();
+                                                return Ricetta_Screen(ricetta : snapshot.data[index] );
                                               },
                                             ),
                                           );
                                         },
                                       ));
                                 })
-                            : Text("Nothing to show here!");
+                            : Text("Niente da mostrare!");
                       } else {
                         return Center(
                           child: SizedBox(

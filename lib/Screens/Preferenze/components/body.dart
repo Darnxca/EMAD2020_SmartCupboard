@@ -1,19 +1,45 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:smart_cupboard/Screens/HomePage/home_page.dart';
-
 import 'package:smart_cupboard/Screens/Login/components/background.dart';
-import 'package:smart_cupboard/Screens/Signup/signup_screen.dart';
-import 'package:smart_cupboard/Screens/Welcome/welcome_screen.dart';
-import 'package:smart_cupboard/components/already_have_an_account_acheck.dart';
 import 'package:smart_cupboard/components/rounded_button.dart';
 import 'package:smart_cupboard/components/rounded_input_field.dart';
-import 'package:smart_cupboard/components/rounded_password_field.dart';
 
 
-class Body extends StatelessWidget {
-  const Body({
-    Key key,
-  }) : super(key: key);
+class Body extends StatefulWidget {
+
+  _BodyState createState() => _BodyState();
+}
+
+class _BodyState extends State<Body> {
+  FlutterLocalNotificationsPlugin localNotification;
+
+  @override
+  void initState() {
+    super.initState();
+    var androidInitialize = new AndroidInitializationSettings("mipmap/ic_launcher");
+
+    var IOSInitialize = new IOSInitializationSettings();
+    var initializationSettings = new InitializationSettings(android: androidInitialize, iOS: IOSInitialize);
+
+    localNotification = new FlutterLocalNotificationsPlugin();
+    try {
+      localNotification.initialize(initializationSettings);
+    }on MissingPluginException catch (e){
+      print(e.message);
+    }
+  }
+
+  Future showNotification() async{
+    var andriodDetaild = new AndroidNotificationDetails("channelId", "LocalNotification", " FUNZIONERà????",importance: Importance.high);
+
+    var iOSDetails = new IOSNotificationDetails();
+
+    var generalNotificationDetails = new NotificationDetails(android: andriodDetaild, iOS: iOSDetails);
+
+    await localNotification.show(0, "Asfenazza", "body della notifica", generalNotificationDetails);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,14 +76,15 @@ class Body extends StatelessWidget {
             RoundedButton(
               text: "Invia",
               press: () {
-                Navigator.push(
+                showNotification();
+                /*Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) {
                       return HomePage();
                     },
                   ),
-                );
+                );*/
               },
             ),
             SizedBox(height: size.height * 0.03),
@@ -66,4 +93,6 @@ class Body extends StatelessWidget {
       ),
     );
   }
+
+
 }

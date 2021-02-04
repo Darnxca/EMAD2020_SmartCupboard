@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:smart_cupboard/Screens/HomePage/home_page.dart';
 import 'package:smart_cupboard/Screens/Login/components/background.dart';
+import 'package:smart_cupboard/Screens/RicercaRicette/ricerca_ricette.dart';
+import 'package:smart_cupboard/Screens/Ricetta/ricetta_screen.dart';
 import 'package:smart_cupboard/components/rounded_button.dart';
 import 'package:smart_cupboard/components/rounded_input_field.dart';
 
@@ -15,6 +17,8 @@ class Body extends StatefulWidget {
 class _BodyState extends State<Body> {
   FlutterLocalNotificationsPlugin localNotification;
 
+  final GlobalKey<NavigatorState> navigatorKey = GlobalKey(debugLabel: "Main Navigator");
+
   @override
   void initState() {
     super.initState();
@@ -25,10 +29,20 @@ class _BodyState extends State<Body> {
 
     localNotification = new FlutterLocalNotificationsPlugin();
     try {
-      localNotification.initialize(initializationSettings);
+      localNotification.initialize(initializationSettings, onSelectNotification: selectNotification );
     }on MissingPluginException catch (e){
       print(e.message);
     }
+  }
+
+  Future selectNotification(String payload) async {
+    if (payload != null) {
+      print('notification payload: $payload');
+    }
+    await Navigator.push(
+      context,
+      MaterialPageRoute<void>(builder: (context) => RicercaRicette()),
+    );
   }
 
   Future showNotification() async{

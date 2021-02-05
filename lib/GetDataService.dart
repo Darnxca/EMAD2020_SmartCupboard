@@ -127,7 +127,7 @@ class GetDataService {
   }
 
   // ignore: missing_return
-  Future<List<Ricetta>> gellAllRicette() async {
+  Future<List<Ricetta>> gellAllRicetteChePuoiFare() async {
 
     Database db = await SingletonDatabaseConnection.instance.database;
 
@@ -163,7 +163,7 @@ class GetDataService {
 
         if(flag) {
           ricetta = Ricetta(values["NomeRicetta"], values["Difficolta"],
-              values["Procedimento"], values["urlImg"], ingredienti);
+              values["Procedimento"], values["urlImg"], ingredienti,values["healthy"]);
 
           allRicette.add(ricetta);
         }
@@ -173,9 +173,7 @@ class GetDataService {
   }
 
 
-
-  /*
-  * // ignore: missing_return
+  // ignore: missing_return
   Future<List<Ricetta>> gellAllRicette() async {
     List<Ricetta> allRicette = [];
     await FirebaseDatabase.instance
@@ -191,12 +189,40 @@ class GetDataService {
           ingredienti.add(value);
         });
         ricetta = Ricetta(values["NomeRicetta"], values["Difficolta"],
-            values["Procedimento"], values["urlImg"], ingredienti);
+            values["Procedimento"], values["urlImg"], ingredienti,values["healthy"]);
         allRicette.add(ricetta);
       });
         });
     return allRicette;
-  }*/
+  }
+
+  // ignore: missing_return
+  Future<List<Ricetta>> gellAllRicetteHealthy() async {
+    List<Ricetta> allRicette = [];
+    await FirebaseDatabase.instance
+        .reference()
+        .child("Ricette")
+        .once()
+        .then((DataSnapshot snapshot) {
+      Map<dynamic, dynamic> values = snapshot.value;
+      values.forEach((key, values) {
+        List<String> ingredienti = [];
+        Map<dynamic,dynamic> i = values["Ingredienti"];
+        i.forEach((key, value) {
+          ingredienti.add(value);
+        });
+        if(values["healthy"] == true) {
+          ricetta = Ricetta(values["NomeRicetta"], values["Difficolta"],
+              values["Procedimento"], values["urlImg"], ingredienti,
+              values["healthy"]);
+          allRicette.add(ricetta);
+        }
+      });
+    });
+    return allRicette;
+  }
+
+
   Future<List<Item>> inserisciProdottoListaSpesa(ListaSpesaEntity d) async {
     Database db = await SingletonDatabaseConnection.instance.database;
 

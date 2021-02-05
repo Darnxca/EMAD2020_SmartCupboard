@@ -1,9 +1,10 @@
 class Ricetta {
   String _nomeRicetta, _difficolta, _procedimento, _urlImg;
   List<String> _ingredienti;
+  bool _healthy;
 
   Ricetta(this._nomeRicetta, this._difficolta, this._procedimento, this._urlImg,
-      this._ingredienti);
+      this._ingredienti,this._healthy);
 
   List<String> get ingredienti => _ingredienti;
 
@@ -35,9 +36,15 @@ class Ricetta {
     _nomeRicetta = value;
   }
 
+  bool get healthy => _healthy;
+
+  set healthy(bool value) {
+    _healthy = value;
+  }
+
   @override
   String toString() {
-    return 'Ricetta{_nomeRicetta: $_nomeRicetta, _difficolta: $_difficolta, _procedimento: $_procedimento, _urlImg: $_urlImg, _ingredienti: $_ingredienti}';
+    return 'Ricetta{_nomeRicetta: $_nomeRicetta, _difficolta: $_difficolta, _procedimento: $_procedimento, _urlImg: $_urlImg, _ingredienti: $_ingredienti, _healthy: $_healthy}';
   }
 
   @override
@@ -49,7 +56,8 @@ class Ricetta {
           _difficolta == other._difficolta &&
           _procedimento == other._procedimento &&
           _urlImg == other._urlImg &&
-          _ingredienti == other._ingredienti;
+          _ingredienti == other._ingredienti &&
+          _healthy == other._healthy;
 
   @override
   int get hashCode =>
@@ -57,5 +65,6 @@ class Ricetta {
       _difficolta.hashCode ^
       _procedimento.hashCode ^
       _urlImg.hashCode ^
-      _ingredienti.hashCode;
+      _ingredienti.hashCode ^
+      _healthy.hashCode;
 }

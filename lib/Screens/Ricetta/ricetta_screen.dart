@@ -8,10 +8,13 @@ class Ricetta_Screen extends StatelessWidget {
   Ricetta_Screen({Key key, @required this.ricetta}) : super(key: key);
 
   Widget build(BuildContext context) {
-    print("Ricetta");
-    print(ricetta.toString());
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: Colors.orange,
+        title: Text('Ricette'),
+      ),
       body: Container(
         width: double.infinity,
         height: double.infinity,

@@ -1,11 +1,13 @@
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smart_cupboard/GetDataService.dart';
 import 'package:smart_cupboard/Screens/Aggiunta/aggiunta.dart';
 import 'package:smart_cupboard/Screens/HomePage/Components/MainDrawer.dart';
+import 'package:smart_cupboard/Screens/HomePage/home_page.dart';
 import 'package:smart_cupboard/Screens/LaMiaDIspensa/components/body.dart';
-import 'package:smart_cupboard/Screens/temp/temp_screen.dart';
 import 'package:smart_cupboard/modal/Prodotto.dart';
 import '../../constants.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
@@ -39,6 +41,18 @@ class MyDispensaScreenState extends State<MyDispensaScreen>
      return service.getProdottiFromFirebase(codice);
   }
 
+
+  void _tornaindietro(){
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) {
+          return HomePage();
+        },
+      ) ,
+    );
+  }
+
   Widget build(BuildContext context) {
     Color backgroundColor = kPrimaryColor;
     Color foregroundColor = White;
@@ -46,7 +60,11 @@ class MyDispensaScreenState extends State<MyDispensaScreen>
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text('La mia dispensa'),
+        leading: BackButton(
+          onPressed: _tornaindietro,
+        ),
       ),
+
       drawer: MainDrawer(),
       body: BodyExpansionPanel(),
       floatingActionButton: new Column(

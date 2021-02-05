@@ -91,7 +91,7 @@ class _MyHomePageState extends State<HomePage> {
               ),
               Expanded(
                 child: FutureBuilder(
-                    future: getDataService.gellAllRicette(),
+                    future: getDataService.gellAllRicetteChePuoiFare(),
                     builder: (BuildContext context, AsyncSnapshot snapshot) {
                       if (snapshot.hasError) {
                         print("Errore" + snapshot.error.toString());

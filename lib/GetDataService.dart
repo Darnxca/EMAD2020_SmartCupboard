@@ -1,8 +1,11 @@
 import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:smart_cupboard/item.dart';
 import 'package:smart_cupboard/modal/ListaSpesaEntity.dart';
 import 'package:sqflite/sqflite.dart';
 import 'Prodotti.dart';
+import 'Screens/LaMiaDIspensa/MyDispensaScreen.dart';
 import 'SingletonDatabaseConnection.dart';
 import 'modal/DispensaEntity.dart';
 import 'modal/Ricetta.dart';
@@ -16,7 +19,7 @@ class GetDataService {
 
   GetDataService() {}
 
-  Future getProdottiFromFirebase(String codice) async {
+  Future getProdottiFromFirebase(String codice, BuildContext context) async {
     dbRef = (await FirebaseDatabase.instance
         .reference()
         .child("Prodotti/" + codice));
@@ -27,7 +30,17 @@ class GetDataService {
             codice, snapshot.value["nome"], snapshot.value["categoria"]);
         print("FIREBASE: " + result.toString());
 
-        insertProdottoDispensa(result);
+
+        // aspetto che venga inserito il prodotto nel database Per ricaricare la pagina
+        insertProdottoDispensa(result).then((value){
+          Navigator.pop(context);
+          Navigator.push(context, MaterialPageRoute(
+            builder: (context) {
+              return MyDispensaScreen();
+            },
+          ),
+          );
+        });
       } on NoSuchMethodError catch (e) {
         print("Prodotto non trovato");
       }

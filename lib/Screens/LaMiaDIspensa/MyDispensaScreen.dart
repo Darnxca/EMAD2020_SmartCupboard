@@ -34,11 +34,11 @@ class MyDispensaScreenState extends State<MyDispensaScreen>
     );
   }
 
-  Future getCodiceEan() async {
+  Future getCodiceEan(BuildContext context) async {
      codice = await FlutterBarcodeScanner.scanBarcode(
         "#004297", "Cancella", true, ScanMode.BARCODE);
 
-     return service.getProdottiFromFirebase(codice);
+     return service.getProdottiFromFirebase(codice, context);
   }
 
 
@@ -98,16 +98,7 @@ class MyDispensaScreenState extends State<MyDispensaScreen>
                       ),
                     );
                   } else {
-                    getCodiceEan().then((value) {
-                        Navigator.pop(context);
-                        Navigator.push(context, MaterialPageRoute(
-                          builder: (context) {
-                            return MyDispensaScreen();
-                            //return tempScreen();
-                          },
-                        ),
-                        );
-                    });
+                    getCodiceEan(context);
                   }
                 },
               ),

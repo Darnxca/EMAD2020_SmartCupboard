@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,7 @@ import 'Screens/LaMiaDIspensa/MyDispensaScreen.dart';
 import 'SingletonDatabaseConnection.dart';
 import 'modal/DispensaEntity.dart';
 import 'modal/Ricetta.dart';
+import 'modal/Utente.dart';
 
 
 class GetDataService {
@@ -16,6 +18,7 @@ class GetDataService {
   DispensaEntity result;
   Ricetta ricetta;
   Future<Database> database;
+  final FirebaseAuth auth = FirebaseAuth.instance;
 
   GetDataService() {}
 
@@ -44,6 +47,48 @@ class GetDataService {
       } on NoSuchMethodError catch (e) {
         print("Prodotto non trovato");
       }
+    });
+  }
+  // ignore: missing_return
+  Future<Utente> getUtente() async {
+    Utente u ;
+
+    await FirebaseDatabase.instance
+        .reference()
+        .child("Utente/" + auth.currentUser.uid)
+        .once()
+        .then((DataSnapshot snapshot) {
+      try {
+        u = Utente(snapshot.value["nome"], snapshot.value["Cognome"],
+            auth.currentUser.email.toString(), auth.currentUser.uid.toString());
+      } on NoSuchMethodError catch (e) {
+        print("Utente non trovato");
+      }
+    });
+
+    return u;
+  }
+
+  void changePassword(String oldpass,String password,BuildContext context) async{
+    //Create an instance of the current user.
+
+    var authCredential = EmailAuthProvider.credential(email: auth.currentUser.email, password: oldpass);
+
+    try {
+      var result = await auth.currentUser.reauthenticateWithCredential(
+          authCredential);
+
+    }catch(e){
+      print(e);
+    }
+    //Pass in the password to updatePassword.
+    auth.currentUser.updatePassword(password).then((_){
+      print("Successfully changed password");
+
+      FirebaseAuth.instance.signOut();
+    }).catchError((error){
+      print("Password can't be changed" + error.toString());
+      //This might happen, when the wrong password is in, the user isn't found, or if the user hasn't logged in recently.
     });
   }
 

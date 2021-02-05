@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smart_cupboard/Screens/HomePage/home_page.dart';
 import 'package:smart_cupboard/Screens/LaMiaDIspensa/MyDispensaScreen.dart';
 import 'package:smart_cupboard/Screens/ListaSpesa/lista_spesa.dart';
 import 'package:smart_cupboard/Screens/Profilo/profilo.dart';
@@ -47,6 +48,24 @@ class MainDrawer extends StatelessWidget{
                   ],
                 ),
               ),
+            ),
+            ListTile(
+                leading: Icon(Icons.home),
+                title: Text(
+                  'Vai alla home',
+                  style: TextStyle(
+                    fontSize: 18,
+                  ),
+                ),
+                onTap: (){   Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return HomePage();
+                    },
+                  ) ,
+                );
+                }
             ),
             ListTile(
               leading: Icon(Icons.arrow_right),

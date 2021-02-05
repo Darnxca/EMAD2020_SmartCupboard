@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:smart_cupboard/GetDataService.dart';
 import 'package:smart_cupboard/Screens/HomePage/Components/MainDrawer.dart';
@@ -18,13 +20,10 @@ class _MyHomePageState extends State<HomePage> {
   GetDataService getDataService = GetDataService();
 
   List<Widget> itemsData = [];
-  
-
 
 
   @override
   void initState() {
-
     controller.addListener(() {
       double value = controller.offset / 119;
 
@@ -36,9 +35,12 @@ class _MyHomePageState extends State<HomePage> {
     super.initState();
   }
 
+
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
+    final Size size = MediaQuery
+        .of(context)
+        .size;
     final double categoryHeight = size.height * 0.30;
     return SafeArea(
       child: Scaffold(
@@ -56,7 +58,7 @@ class _MyHomePageState extends State<HomePage> {
                 height: 60,
                 child: Padding(
                   padding:
-                      EdgeInsets.only(top: 20, right: 0, left: 15, bottom: 10),
+                  EdgeInsets.only(top: 20, right: 0, left: 15, bottom: 10),
                   child: Text(
                     "La tua dispensa",
                     textAlign: TextAlign.left,
@@ -79,7 +81,7 @@ class _MyHomePageState extends State<HomePage> {
                 height: 40,
                 child: Padding(
                   padding:
-                      EdgeInsets.only(top: 0, right: 0, left: 15, bottom: 10),
+                  EdgeInsets.only(top: 0, right: 0, left: 15, bottom: 10),
                   child: Text(
                     "Ricette che ti potrebbero interessare",
                     textAlign: TextAlign.left,
@@ -94,105 +96,116 @@ class _MyHomePageState extends State<HomePage> {
                       if (snapshot.hasError) {
                         print("Errore" + snapshot.error.toString());
                         return Text(snapshot.error.toString());
-                      } else if (snapshot.connectionState == ConnectionState.done) {
-                        return snapshot.hasData
-                            ? ListView.builder(
-                                controller:
-                                    controller, //serve per far nascondere la lista orizzontale sopra
-                                itemCount: snapshot.data.length,
-                                physics:
-                                    BouncingScrollPhysics(), //effetto rimbalzo
-                                itemBuilder: (context, index) {
-                                  return Align(
-                                      heightFactor: 0.7,
-                                      alignment: Alignment.topCenter,
-                                      child: InkWell(
-                                        child: Container(
-                                            height: 150,
-                                            margin: const EdgeInsets.symmetric(
-                                                horizontal: 20, vertical: 40),
-                                            decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(20.0)),
-                                                color: Colors.white,
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                      color: Colors.black
-                                                          .withAlpha(100),
-                                                      blurRadius: 10.0),
-                                                ]),
-                                            child: Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 15.0,
-                                                  top: 15.0,
-                                                  bottom: 15.0),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: <Widget>[
-                                                  Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              top: 0.0,
-                                                              bottom: 0.0),
-                                                      child: Image.network(
-                                                              snapshot.data[index].urlImg,
-                                                          height: 100,
-                                                          width: 120)),
-                                                  Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: <Widget>[
-                                                      Text(
-                                                        snapshot.data[index].nomeRicetta,
-                                                        //post["name"],
-                                                        style: const TextStyle(
-                                                            fontSize: 20,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold),
-                                                      ),
-                                                      Text(
-                                                        snapshot.data[index].difficolta,
-                                                        style: const TextStyle(
-                                                            fontSize: 17,
-                                                            color: Colors.grey),
-                                                      ),
-                                                      SizedBox(
-                                                        height: 10,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ],
-                                              ),
-                                            )),
-                                        onTap: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) {
-                                                return Ricetta_Screen(ricetta : snapshot.data[index] );
-                                              },
+                      } else
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        if (snapshot.data.length == 0) {
+                          return Text("Ci dispiace, non ci sono ricette riproducibili con i tuoi ingredienti");
+                        }
+                          return snapshot.hasData
+                              ? ListView.builder(
+                              controller:
+                              controller,
+                              //serve per far nascondere la lista orizzontale sopra
+                              itemCount: snapshot.data.length,
+                              physics:
+                              BouncingScrollPhysics(),
+                              //effetto rimbalzo
+                              itemBuilder: (context, index) {
+                                return Align(
+                                    heightFactor: 0.7,
+                                    alignment: Alignment.topCenter,
+                                    child: InkWell(
+                                      child: Container(
+                                          height: 150,
+                                          margin: const EdgeInsets.symmetric(
+                                              horizontal: 20, vertical: 40),
+                                          decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(20.0)),
+                                              color: Colors.white,
+                                              boxShadow: [
+                                                BoxShadow(
+                                                    color: Colors.black
+                                                        .withAlpha(100),
+                                                    blurRadius: 10.0),
+                                              ]),
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 15.0,
+                                                top: 15.0,
+                                                bottom: 15.0),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                              MainAxisAlignment
+                                                  .spaceBetween,
+                                              children: <Widget>[
+                                                Padding(
+                                                    padding:
+                                                    const EdgeInsets.only(
+                                                        top: 0.0,
+                                                        bottom: 0.0),
+                                                    child: Image.network(
+                                                        snapshot.data[index]
+                                                            .urlImg,
+                                                        height: 100,
+                                                        width: 120)),
+                                                Column(
+                                                  crossAxisAlignment:
+                                                  CrossAxisAlignment
+                                                      .start,
+                                                  children: <Widget>[
+                                                    Text(
+                                                      snapshot.data[index]
+                                                          .nomeRicetta,
+                                                      //post["name"],
+                                                      style: const TextStyle(
+                                                          fontSize: 20,
+                                                          fontWeight:
+                                                          FontWeight
+                                                              .bold),
+                                                    ),
+                                                    Text(
+                                                      snapshot.data[index]
+                                                          .difficolta,
+                                                      style: const TextStyle(
+                                                          fontSize: 17,
+                                                          color: Colors.grey),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 10,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
                                             ),
-                                          );
-                                        },
-                                      ));
-                                })
-                            : Text("Niente da mostrare!");
+                                          )),
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) {
+                                              return Ricetta_Screen(
+                                                  ricetta: snapshot
+                                                      .data[index]);
+                                            },
+                                          ),
+                                        );
+                                      },
+                                    ));
+                              })
+                        : Text("Niente da mostrare!");
                       } else {
-                        return Center(
-                          child: SizedBox(
-                            width: 50,
-                            height: 50,
-                            child: CircularProgressIndicator(
-                              strokeWidth: 6,
-                              valueColor: AlwaysStoppedAnimation<Color>(
-                                  Theme.of(context).primaryColor),
-                            ),
-                          ),
-                        );
+                      return Center(
+                      child: SizedBox(
+                      width: 50,
+                      height: 50,
+                      child: CircularProgressIndicator(
+                      strokeWidth: 6,
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                      Theme.of(context).primaryColor),
+                      ),
+                      ),
+                      );
                       }
                     }),
               )

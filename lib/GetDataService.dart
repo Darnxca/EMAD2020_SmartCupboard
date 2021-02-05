@@ -128,6 +128,55 @@ class GetDataService {
 
   // ignore: missing_return
   Future<List<Ricetta>> gellAllRicette() async {
+
+    Database db = await SingletonDatabaseConnection.instance.database;
+
+    final List<Map<String, dynamic>> maps = await db.query('Dispensa');
+    List<String> ingDispensa =  List.generate(maps.length, (i) {
+      return maps[i]['nome'].toString().toLowerCase();
+    });
+
+    ingDispensa.forEach((element) {
+      print(element);
+    });
+
+    List<Ricetta> allRicette = [];
+    await FirebaseDatabase.instance
+        .reference()
+        .child("Ricette")
+        .once()
+        .then((DataSnapshot snapshot) {
+      Map<dynamic, dynamic> values = snapshot.value;
+      values.forEach((key, values) {
+        List<String> ingredienti = []; //ingredienti della singola ricetta
+        Map<dynamic,dynamic> i = values["Ingredienti"];
+        i.forEach((key, value) {
+          ingredienti.add(value);
+        });
+
+        bool flag = true;
+        for(int j = 0; j< ingredienti.length;j++){
+          if (!ingDispensa.contains(ingredienti[j].toLowerCase())){
+            flag = false;
+          }
+        }
+
+        if(flag) {
+          ricetta = Ricetta(values["NomeRicetta"], values["Difficolta"],
+              values["Procedimento"], values["urlImg"], ingredienti);
+
+          allRicette.add(ricetta);
+        }
+      });
+        });
+    return allRicette;
+  }
+
+
+
+  /*
+  * // ignore: missing_return
+  Future<List<Ricetta>> gellAllRicette() async {
     List<Ricetta> allRicette = [];
     await FirebaseDatabase.instance
         .reference()
@@ -147,8 +196,7 @@ class GetDataService {
       });
         });
     return allRicette;
-  }
-
+  }*/
   Future<List<Item>> inserisciProdottoListaSpesa(ListaSpesaEntity d) async {
     Database db = await SingletonDatabaseConnection.instance.database;
 

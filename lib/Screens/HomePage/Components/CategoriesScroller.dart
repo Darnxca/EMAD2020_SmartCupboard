@@ -27,7 +27,7 @@ class CategoriesScroller extends StatelessWidget {
                   height: 150,
                   decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: AssetImage("assets/images/imgCategorie/farine&derivati.png"),
+                        image: AssetImage("assets/images/imgCategorie/farineederivati.png"),
                         fit: BoxFit.cover,
                       ),
                       borderRadius: BorderRadius.all(Radius.circular(20.0))),

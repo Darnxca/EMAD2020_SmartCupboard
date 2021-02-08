@@ -39,6 +39,9 @@ class AuthenticationService {
       );
       return "Signed in";
     } on FirebaseAuthException catch (e) {
+      Scaffold.of(context).showSnackBar(SnackBar(
+        content: Text("Username o password errati"),
+      ));
       return e.message;
     }
   }

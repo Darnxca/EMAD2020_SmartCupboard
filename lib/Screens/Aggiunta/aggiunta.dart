@@ -159,7 +159,7 @@ class _AggiuntaProdottoState extends State<AggiuntaProdotto> {
 
 //BOTTOM SHEET
 void _settingModalBottomSheet(context) {
-  String dropdownValue = 'Farina & derivati';
+  String dropdownValue = 'Farine e derivati';
   Size size = MediaQuery.of(context).size;
 
   String nomeProdotto;
@@ -226,10 +226,14 @@ void _settingModalBottomSheet(context) {
                           //categoria = newValue;
                       },
                       items: <String>[
-                        'Farina & derivati',
+                        'Farine e derivati',
                         'Frutta',
+                        'Verdura',
                         'Carne',
                         'Dolci',
+                        'Spezie',
+                        'Scatolati',
+                        'Oli',
                         'Altro'
                       ].map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(

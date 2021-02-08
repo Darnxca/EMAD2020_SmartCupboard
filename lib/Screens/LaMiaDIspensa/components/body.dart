@@ -45,7 +45,6 @@ class _BodyExpansionPanelState extends State<BodyExpansionPanel> {
      return FutureBuilder(
       future: _getData,
       builder: (BuildContext context, AsyncSnapshot snapshot) {
-        print(" DATI " + snapshot.data.toString());
         if (snapshot.hasError) {
           print("Errore" + snapshot.error.toString());
           return Text(snapshot.error.toString());
@@ -109,14 +108,9 @@ class _BodyExpansionPanelState extends State<BodyExpansionPanel> {
                               tooltip: "Prodotto aggiunto alla lista della spesa",
                               onPressed: () {
                                 getDataService.inserisciProdottoListaSpesa(ListaSpesaEntity( item.prodottiDipensa[index].EAN, item.prodottiDipensa[index].name)).then((value) {
-                                  Navigator.pop(context);
-                                  Navigator.push(context, MaterialPageRoute(
-                                    builder: (context) {
-                                      return MyDispensaScreen();
-                                      //return tempScreen();
-                                    },
-                                  ),
-                                  );
+                                  Scaffold.of(context).showSnackBar(SnackBar(
+                                    content: Text("Prodotto aggiunto alla lista della spesa"),
+                                  ));
                                 });
                               },
                             

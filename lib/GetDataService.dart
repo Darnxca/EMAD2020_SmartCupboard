@@ -29,10 +29,7 @@ class GetDataService {
 
     dbRef.once().then((DataSnapshot snapshot) {
       try {
-        result = DispensaEntity(
-            codice, snapshot.value["nome"], snapshot.value["categoria"]);
-        print("FIREBASE: " + result.toString());
-
+        result = DispensaEntity(codice, snapshot.value["nome"], snapshot.value["categoria"]);
 
         // aspetto che venga inserito il prodotto nel database Per ricaricare la pagina
         insertProdottoDispensa(result).then((value){
@@ -45,7 +42,10 @@ class GetDataService {
           );
         });
       } on NoSuchMethodError catch (e) {
-        print("Prodotto non trovato");
+
+        Scaffold.of(context).showSnackBar(SnackBar(
+          content: Text("Prodotto non trovato"),
+        ));
       }
     });
   }
@@ -83,11 +83,14 @@ class GetDataService {
     }
     //Pass in the password to updatePassword.
     auth.currentUser.updatePassword(password).then((_){
-      print("Successfully changed password");
-
       FirebaseAuth.instance.signOut();
+      Scaffold.of(context).showSnackBar(SnackBar(
+        content: Text("Password cambiata con successo"),
+      ));
     }).catchError((error){
-      print("Password can't be changed" + error.toString());
+      Scaffold.of(context).showSnackBar(SnackBar(
+        content: Text("Errore! Password non cambiata"),
+      ));
       //This might happen, when the wrong password is in, the user isn't found, or if the user hasn't logged in recently.
     });
   }
@@ -141,7 +144,7 @@ class GetDataService {
         categoryName: categorie[i]['categoria'],
         expandedValue: 'Details for Book  goes where',
         prodottiDipensa: listProdotti,
-        urlImg: categorie[i]['categoria'].toLowerCase()+".png",
+        urlImg: categorie[i]['categoria'].replaceAll(new RegExp(r"\s+"), "").toLowerCase()+".png",
       ));
       print(categorie[i]['categoria'].toLowerCase().replaceAll(new RegExp(r"\s+"), "")+".png");
     }

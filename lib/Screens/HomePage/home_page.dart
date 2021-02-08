@@ -135,41 +135,39 @@ class _MyHomePageState extends State<HomePage> {
                                                 top: 15.0,
                                                 bottom: 15.0),
                                             child: Row(
-                                              mainAxisAlignment:
-                                              MainAxisAlignment
-                                                  .spaceBetween,
                                               children: <Widget>[
                                                 Padding(
-                                                    padding:
-                                                    const EdgeInsets.only(
-                                                        top: 0.0,
-                                                        bottom: 0.0),
+                                                    padding: const EdgeInsets.only(
+                                                        left: 0.0,
+                                                        top: 0.0, bottom: 0.0),
                                                     child: Image.network(
-                                                        snapshot.data[index]
-                                                            .urlImg,
+                                                        snapshot.data[index].urlImg,
                                                         height: 100,
                                                         width: 120)),
                                                 Column(
                                                   crossAxisAlignment:
-                                                  CrossAxisAlignment
-                                                      .start,
+                                                  CrossAxisAlignment.start,
                                                   children: <Widget>[
-                                                    Text(
-                                                      snapshot.data[index]
-                                                          .nomeRicetta,
-                                                      //post["name"],
-                                                      style: const TextStyle(
-                                                          fontSize: 20,
-                                                          fontWeight:
-                                                          FontWeight
-                                                              .bold),
+                                                    Padding(
+                                                      padding: const EdgeInsets.only(left: 20.0),
+                                                      child: Text(
+                                                        snapshot.data[index].nomeRicetta,
+                                                        style: const TextStyle(
+                                                            fontSize: 15,
+                                                            decoration: TextDecoration.none,
+                                                            color: Colors.black,
+                                                            fontWeight: FontWeight.bold),
+                                                      ),
                                                     ),
-                                                    Text(
-                                                      snapshot.data[index]
-                                                          .difficolta,
-                                                      style: const TextStyle(
-                                                          fontSize: 17,
-                                                          color: Colors.grey),
+                                                    Padding(
+                                                      padding: const EdgeInsets.only(left: 20.0),
+                                                      child: Text(
+                                                        "Difficoltà: "+snapshot.data[index].difficolta,
+                                                        style: const TextStyle(
+                                                            fontSize: 15,
+                                                            decoration: TextDecoration.none,
+                                                            color: Colors.grey),
+                                                      ),
                                                     ),
                                                     SizedBox(
                                                       height: 10,

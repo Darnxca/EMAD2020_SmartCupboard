@@ -59,8 +59,6 @@ class _TueRicetteState extends State<TueRicette> {
                                   padding: const EdgeInsets.only(
                                       left: 15.0, top: 15.0, bottom: 15.0),
                                   child: Row(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
                                     children: <Widget>[
                                       Padding(
                                           padding: const EdgeInsets.only(
@@ -75,7 +73,7 @@ class _TueRicetteState extends State<TueRicette> {
                                         CrossAxisAlignment.start,
                                         children: <Widget>[
                                           Padding(
-                                            padding: const EdgeInsets.only(right: 20.0),
+                                            padding: const EdgeInsets.only(left: 20.0),
                                             child: Text(
                                               snapshot.data[index].nomeRicetta,
                                               //post["name"],
@@ -86,12 +84,15 @@ class _TueRicetteState extends State<TueRicette> {
                                                   fontWeight: FontWeight.bold),
                                             ),
                                           ),
-                                          Text(
-                                            snapshot.data[index].difficolta,
-                                            style: const TextStyle(
-                                                fontSize: 15,
-                                                decoration: TextDecoration.none,
-                                                color: Colors.grey),
+                                          Padding(
+                                            padding: const EdgeInsets.only(left: 20.0),
+                                            child: Text(
+                                              "Difficoltà: "+snapshot.data[index].difficolta,
+                                              style: const TextStyle(
+                                                  fontSize: 15,
+                                                  decoration: TextDecoration.none,
+                                                  color: Colors.grey),
+                                            ),
                                           ),
                                           SizedBox(
                                             height: 10,

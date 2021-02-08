@@ -8,8 +8,7 @@ import 'package:smart_cupboard/Screens/temp/temp_screen.dart';
 import '../../GetDataService.dart';
 
 class RicercaRicette extends StatefulWidget {
-  final List<String> list = ["Farina", "Latticini", "Verdura", "Frutta"];
-  final List<String> listFarina = ["Pane", "Pasta"];
+ 
 
   @override
   _myRicercaRicetteState createState() => _myRicercaRicetteState();

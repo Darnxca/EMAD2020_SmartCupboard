@@ -5,8 +5,6 @@ import 'package:smart_cupboard/Screens/RIcetta/Ricetta_Screen.dart';
 
 
 class TutteLeRicette extends StatefulWidget {
-  final List<String> list = ["Farina", "Latticini", "Verdura", "Frutta"];
-  final List<String> listFarina = ["Pane", "Pasta"];
 
   @override
   _TutteLeRicetteState createState() => _TutteLeRicetteState();
@@ -61,8 +59,6 @@ class _TutteLeRicetteState extends State<TutteLeRicette> {
                                   padding: const EdgeInsets.only(
                                       left: 15.0, top: 15.0, bottom: 15.0),
                                   child: Row(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
                                     children: <Widget>[
                                       Padding(
                                           padding: const EdgeInsets.only(
@@ -77,10 +73,9 @@ class _TutteLeRicetteState extends State<TutteLeRicette> {
                                         CrossAxisAlignment.start,
                                         children: <Widget>[
                                           Padding(
-                                            padding: const EdgeInsets.only(right: 20.0),
+                                            padding: const EdgeInsets.only(left: 20.0),
                                             child: Text(
                                               snapshot.data[index].nomeRicetta,
-                                              //post["name"],
                                               style: const TextStyle(
                                                   fontSize: 15,
                                                   decoration: TextDecoration.none,
@@ -88,12 +83,15 @@ class _TutteLeRicetteState extends State<TutteLeRicette> {
                                                   fontWeight: FontWeight.bold),
                                             ),
                                           ),
-                                          Text(
-                                            snapshot.data[index].difficolta,
-                                            style: const TextStyle(
-                                                fontSize: 15,
-                                                decoration: TextDecoration.none,
-                                                color: Colors.grey),
+                                          Padding(
+                                            padding: const EdgeInsets.only(left: 20.0),
+                                            child: Text(
+                                              "Difficoltà: "+snapshot.data[index].difficolta,
+                                              style: const TextStyle(
+                                                  fontSize: 15,
+                                                  decoration: TextDecoration.none,
+                                                  color: Colors.grey),
+                                            ),
                                           ),
                                           SizedBox(
                                             height: 10,

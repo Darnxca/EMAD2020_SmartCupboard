@@ -5,7 +5,6 @@ import 'package:smart_cupboard/Screens/HomePage/home_page.dart';
 import 'package:smart_cupboard/Screens/Login/components/background.dart';
 import 'package:smart_cupboard/Screens/RicercaRicette/ricerca_ricette.dart';
 import 'package:smart_cupboard/components/rounded_button.dart';
-import 'package:smart_cupboard/components/rounded_input_field.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 

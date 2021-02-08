@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:smart_cupboard/Screens/RIcetta/Ricetta_Screen.dart';
 import 'package:smart_cupboard/Screens/RicercaRicette/components/ricetteHealthy.dart';
 import 'package:smart_cupboard/Screens/RicercaRicette/components/tueRicette.dart';
 import 'package:smart_cupboard/Screens/RicercaRicette/components/tutteLeRicette.dart';
-import 'package:smart_cupboard/Screens/temp/temp_screen.dart';
 
 import '../../GetDataService.dart';
 

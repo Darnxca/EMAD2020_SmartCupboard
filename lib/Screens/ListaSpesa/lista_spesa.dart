@@ -80,52 +80,6 @@ class _MyHomePageState extends State<ListaSpesa> {
           }
           return Text("loading");
         });
-
-    /* responseList.forEach((post) {
-      listItems.add(Container(
-          height: 70,
-          margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(20.0)),
-              color: Colors.white,
-              boxShadow: [
-                BoxShadow(color: Colors.black.withAlpha(100), blurRadius: 10.0),
-              ]),
-          child: Padding(
-            padding: const EdgeInsets.only(
-                left: 15.0, top: 15.0, right: 5.0, bottom: 15.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                Column(
-
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    SizedBox(height: 7),
-                    Text(
-                      post["name"],
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
-
-                  ],
-                ),
-                SizedBox(width: 80),
-                Icon(Icons.remove),
-                SizedBox(width: 30),
-                Icon(Icons.restore_from_trash),
-
-
-              ],
-
-
-            ),
-          )));
-    });
-    setState(() {
-      itemsData = listItems;
-    });*/
   }
 
   @override
@@ -321,48 +275,51 @@ class _MyHomePageState extends State<ListaSpesa> {
     showModalBottomSheet(
         context: context,
         builder: (BuildContext bc) {
-          return Container(
-            child: new Wrap(
-              children: <Widget>[
-                Container(
-                  margin:
-                  const EdgeInsets.symmetric(horizontal: 50, vertical: 10),
-                  width: 300.0,
-                  child: RoundedInputField(
-                    hintText: "Inserisci nome prodotto",
-                    icon: null,
-                    validator: (input) {
-                      if (input.isEmpty()) {
-                        return 'Inserisci nome prodotto';
-                      } else {
-                        return input;
-                      }
-                    },
-                    onChanged: (input) {nomeProdotto = input;},
+          return Padding(
+            padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+            child: Container(
+              child: new Wrap(
+                children: <Widget>[
+                  Container(
+                    margin:
+                    const EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+                    width: 300.0,
+                    child: RoundedInputField(
+                      hintText: "Inserisci nome prodotto",
+                      icon: null,
+                      validator: (input) {
+                        if (input.isEmpty()) {
+                          return 'Inserisci nome prodotto';
+                        } else {
+                          return input;
+                        }
+                      },
+                      onChanged: (input) {nomeProdotto = input;},
+                    ),
                   ),
-                ),
-                Container(
-                  margin:
-                  const EdgeInsets.symmetric(horizontal: 85, vertical: 0),
-                  width: 230.0,
-                  child: RoundedButton(
-                    text: "Aggiungi alla lista",
-                    press: (){
-                      ListaSpesaEntity d = ListaSpesaEntity(DateTime.now().millisecondsSinceEpoch.toString(), nomeProdotto);
-                      getDataService.inserisciProdottoListaSpesa(d).then((value) {
-                        Navigator.pop(context);
-                        Navigator.push(context, MaterialPageRoute(
-                          builder: (context) {
-                            return ListaSpesa();
-                            //return tempScreen();
-                          },
-                        ),
-                        );
-                      });
-                    },
+                  Container(
+                    margin:
+                    const EdgeInsets.symmetric(horizontal: 85, vertical: 0),
+                    width: 230.0,
+                    child: RoundedButton(
+                      text: "Aggiungi alla lista",
+                      press: (){
+                        ListaSpesaEntity d = ListaSpesaEntity(DateTime.now().millisecondsSinceEpoch.toString(), nomeProdotto);
+                        getDataService.inserisciProdottoListaSpesa(d).then((value) {
+                          Navigator.pop(context);
+                          Navigator.push(context, MaterialPageRoute(
+                            builder: (context) {
+                              return ListaSpesa();
+                              //return tempScreen();
+                            },
+                          ),
+                          );
+                        });
+                      },
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           );
         });

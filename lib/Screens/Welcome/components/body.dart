@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:smart_cupboard/Screens/Login/login_screen.dart';
 import 'package:smart_cupboard/Screens/Signup/signup_screen.dart';
 import 'package:smart_cupboard/Screens/Welcome/components/background.dart';
 import 'package:smart_cupboard/components/rounded_button.dart';
-import 'package:smart_cupboard/constants.dart';
 
 class Body extends StatelessWidget {
   @override

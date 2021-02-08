@@ -7,8 +7,6 @@ import 'package:smart_cupboard/Screens/RicercaRicette/ricerca_ricette.dart';
 import 'package:smart_cupboard/constants.dart';
 import 'package:provider/provider.dart';
 
-import 'package:smart_cupboard/Screens/Login/login_screen.dart';
-
 import '../../../AuthenticationService.dart';
 
 class MainDrawer extends StatelessWidget{
@@ -26,23 +24,26 @@ class MainDrawer extends StatelessWidget{
                 child: Column(
                   children: <Widget>[
                     Container(
-                      width: 100,
+                      width: 130,
                       height: 100,
                       margin: EdgeInsets.only(
                         top: 30,
                       ),
                       decoration: BoxDecoration(
-                        shape: BoxShape.circle,
+                        shape: BoxShape.rectangle,
                         image: new DecorationImage(
-                            image: new ExactAssetImage('assets/images/user.jpg'),
+                            image: new ExactAssetImage('assets/images/logoBN.png'),
                             fit: BoxFit.fill
                         ),
                       ),
                     ),
-                    Text('Nome Utente',
-                      style: TextStyle(
-                        fontSize: 22,
-                        color: White,
+                    Padding(
+                      padding: const EdgeInsets.only(top: 8.0),
+                      child: Text('Benvenuto',
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: White,
+                        ),
                       ),
                     ),
                   ],
@@ -68,7 +69,7 @@ class MainDrawer extends StatelessWidget{
                 }
             ),
             ListTile(
-              leading: Icon(Icons.arrow_right),
+              leading: Icon(Icons.fastfood ),
               title: Text(
                 'La mia dispensa',
                 style: TextStyle(
@@ -86,7 +87,7 @@ class MainDrawer extends StatelessWidget{
                 }
             ),
             ListTile(
-              leading: Icon(Icons.arrow_right),
+              leading: Icon(Icons.featured_play_list ),
               title: Text(
                 'Lista della spesa',
                 style: TextStyle(
@@ -105,7 +106,7 @@ class MainDrawer extends StatelessWidget{
               },
             ),
             ListTile(
-              leading: Icon(Icons.arrow_right),
+              leading: Icon(Icons.menu_book),
               title: Text(
                 'Ricette',
                 style: TextStyle(
@@ -123,7 +124,7 @@ class MainDrawer extends StatelessWidget{
                 }
             ),
             ListTile(
-              leading: Icon(Icons.arrow_right),
+              leading: Icon(Icons.person),
               title: Text(
                 'Profilo',
                 style: TextStyle(
@@ -142,7 +143,7 @@ class MainDrawer extends StatelessWidget{
               },
             ),
             ListTile(
-              leading: Icon(Icons.arrow_right),
+              leading: Icon(Icons.logout),
               title: Text(
                 'Logout',
                 style: TextStyle(

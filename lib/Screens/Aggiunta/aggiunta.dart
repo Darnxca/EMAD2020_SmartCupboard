@@ -227,6 +227,7 @@ void _settingModalBottomSheet(context) {
                       },
                       items: <String>[
                         'Farine e derivati',
+                        'Latte e derivati',
                         'Frutta',
                         'Verdura',
                         'Carne',

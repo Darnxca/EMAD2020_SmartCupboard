@@ -37,235 +37,223 @@ class _BodyState extends State<Body> {
       } else if (snapshot.connectionState == ConnectionState.done && snapshot.hasData) {
         print(snapshot.data);
         return Scaffold(
-          body: Container(
-              alignment: Alignment.topCenter,
-              child: Column(
-                children: <Widget>[
-                  Icon(Icons.person_outline_rounded, size: 150),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        left: 25, top: 30, right: 0, bottom: 0),
-                    child: Container(
-                        child: Row(
-                          children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 0, top: 0, right: 0, bottom: 0),
-                              child: Text(
-                                "Nome",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 15),
-                              ),
-                            ),
-                            Container(
-                              margin: const EdgeInsets.symmetric(
-                                  horizontal: 28, vertical: 0),
-                              width: 250.0,
-                              child: Padding(
+            
+          body: SingleChildScrollView(
+            child: Container(
+                alignment: Alignment.topCenter,
+                child: Column(
+                  children: <Widget>[
+                    Icon(Icons.person_outline_rounded, size: 150),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          left: 25, top: 30, right: 0, bottom: 0),
+                      child: Container(
+                          child: Row(
+                            children: <Widget>[
+                              Padding(
                                 padding: const EdgeInsets.only(
-                                    left: 10, top: 5, right: 0, bottom: 0),
-                                child: TextField(
-                                  textAlign: TextAlign.center,
-                                  decoration: new InputDecoration(
-                                      contentPadding:
-                                      const EdgeInsets.symmetric(vertical: 5.0),
-                                      border: new OutlineInputBorder(
-                                        borderRadius: const BorderRadius.all(
-                                          const Radius.circular(20.0),
-                                        ),
-                                      ),
-                                      filled: true,
-                                      hintStyle:
-                                      new TextStyle(color: Colors.grey[800]),
-                                      hintText: snapshot.data.nome,
-                                      fillColor: Colors.white70),
+                                    left: 0, top: 10, right: 0, bottom: 0),
+                                child: Text(
+                                  "Nome",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold, fontSize: 18),
                                 ),
                               ),
-                            ),
-                          ],
-                        )),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        left: 25, top: 30, right: 0, bottom: 0),
-                    child: Container(
-                        child: Row(
-                          children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 0, top: 0, right: 10, bottom: 0),
-                              child: Text(
-                                "Cognome",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 15),
-                              ),
-                            ),
-                            Container(
-                              margin: const EdgeInsets.symmetric(
-                                  horizontal: 2, vertical: 0),
-                              width: 250.0,
-                              child: Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 0, top: 5, right: 0, bottom: 0),
-                                child: TextField(
-                                  textAlign: TextAlign.center,
-                                  decoration: new InputDecoration(
-                                      contentPadding:
-                                      const EdgeInsets.symmetric(vertical: 5.0),
-                                      border: new OutlineInputBorder(
-                                        borderRadius: const BorderRadius.all(
-                                          const Radius.circular(20.0),
-                                        ),
-                                      ),
-                                      filled: true,
-                                      hintStyle:
-                                      new TextStyle(color: Colors.grey[800]),
-                                      hintText: snapshot.data.cognome,
-                                      fillColor: Colors.white70),
-                                ),
-                              ),
-                            ),
-                          ],
-                        )),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        left: 25, top: 30, right: 0, bottom: 0),
-                    child: Container(
-                        child: Row(
-                          children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 0, top: 0, right: 0, bottom: 0),
-                              child: Text(
-                                "Email",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 15),
-                              ),
-                            ),
-                            Container(
-                              margin: const EdgeInsets.symmetric(
-                                  horizontal: 20, vertical: 0),
-                              width: 270.0,
-                              child: Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 20, top: 5, right: 0, bottom: 0),
-                                child: TextField(
-                                  textAlign: TextAlign.center,
-                                  decoration: new InputDecoration(
-                                      contentPadding:
-                                      const EdgeInsets.symmetric(vertical: 5.0),
-                                      border: new OutlineInputBorder(
-                                        borderRadius: const BorderRadius.all(
-                                          const Radius.circular(20.0),
-                                        ),
-                                      ),
-                                      filled: true,
-                                      hintStyle:
-                                      new TextStyle(color: Colors.grey[800]),
-                                      hintText: snapshot.data.email,
-                                      fillColor: Colors.white70),
-                                ),
-                              ),
-                            ),
-                          ],
-                        )),
-                  ),
+                              Container(
+                                margin: const EdgeInsets.symmetric(
+                                    horizontal: 28, vertical: 0),
+                                width: 250.0,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 10, top: 0, right: 0, bottom: 0),
+                                  child: TextField(
+                                    enabled: false,
+                                    textAlign: TextAlign.center,
+                                    decoration: new InputDecoration(
+                                        hintText: snapshot.data.nome,
 
-                  Padding(
-                    padding: const EdgeInsets.only(top: 15),
-                    child: Text("Cambia password",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 15),
+                                        labelStyle: new TextStyle(color: const Color(0xFF808080)),
+                                        border: new UnderlineInputBorder(
+                                            borderSide: new BorderSide(
+                                                color: Colors.grey
+                                            )
+                                        )
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          )),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        left: 65, top: 20, right: 0, bottom: 0),
-                    child: Container(
-                        child: Row(
-                          children: <Widget>[
-                            Container(
-                              margin: const EdgeInsets.symmetric(
-                                  horizontal: 21, vertical: 0),
-                              width: 250.0,
-                              child: Padding(
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          left: 25, top: 30, right: 0, bottom: 0),
+                      child: Container(
+                          child: Row(
+                            children: <Widget>[
+                              Padding(
                                 padding: const EdgeInsets.only(
-                                    left: 0, top: 5, right: 0, bottom: 0),
-                                child: TextField(
-                                  textAlign: TextAlign.center,
-                                  decoration: new InputDecoration(
-                                      contentPadding:
-                                      const EdgeInsets.symmetric(vertical: 5.0),
-                                      border: new OutlineInputBorder(
-                                        borderRadius: const BorderRadius.all(
-                                          const Radius.circular(20.0),
-                                        ),
-                                      ),
-                                      filled: true,
-                                      hintStyle:
-                                      new TextStyle(color: Colors.grey[800]),
-                                      hintText: "Vecchia password",
-                                      fillColor: Colors.white70),
-                                  onChanged: (input) {oldPass = input;},
-
+                                    left: 0, top: 10, right: 10, bottom: 0),
+                                child: Text(
+                                  "Cognome",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold, fontSize: 18),
                                 ),
                               ),
-                            ),
-                          ],
-                        )),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        left: 65, top: 20, right: 0, bottom: 0),
-                    child: Container(
-                        child: Row(
-                          children: <Widget>[
+                              Container(
+                                margin: const EdgeInsets.symmetric(
+                                    horizontal: 2, vertical: 0),
+                                width: 250.0,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 0, top: 0, right: 0, bottom: 0),
+                                  child: TextField(
+                                    enabled: false,
+                                    textAlign: TextAlign.center,
+                                    decoration: new InputDecoration(
+                                        hintText: snapshot.data.cognome,
 
-                            Container(
-                              margin: const EdgeInsets.symmetric(
-                                  horizontal: 21, vertical: 0),
-                              width: 250.0,
-                              child: Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 0, top: 5, right: 0, bottom: 0),
-                                child: TextField(
-                                  textAlign: TextAlign.center,
-                                  decoration: new InputDecoration(
-                                      contentPadding:
-                                      const EdgeInsets.symmetric(vertical: 5.0),
-                                      border: new OutlineInputBorder(
-                                        borderRadius: const BorderRadius.all(
-                                          const Radius.circular(20.0),
-                                        ),
-                                      ),
-                                      filled: true,
-                                      hintStyle:
-                                      new TextStyle(color: Colors.grey[800]),
-                                      hintText: "Nuova password",
-                                      fillColor: Colors.white70),
-                                  onChanged: (input) {pass = input;},
-
+                                        labelStyle: new TextStyle(color: const Color(0xFF808080)),
+                                        border: new UnderlineInputBorder(
+                                            borderSide: new BorderSide(
+                                                color: Colors.grey
+                                            )
+                                        )
+                                    ),
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
-                        )),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        left: 0, top: 30, right: 0, bottom: 0),
-                    child: RoundedButton(
-                      text: "Salva modifiche",
-                      press: () {
-                        if(!(pass == "")) {
-                          getDataService.changePassword(oldPass,pass,context);
-                        }
-                      },
+                            ],
+                          )),
                     ),
-                  ),
-                ],
-              )),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          left: 25, top: 30, right: 0, bottom: 0),
+                      child: Container(
+                          child: Row(
+                            children: <Widget>[
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 0, top: 10, right: 0, bottom: 0),
+                                child: Text(
+                                  "Email",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold, fontSize: 18),
+                                ),
+                              ),
+                              Container(
+                                margin: const EdgeInsets.symmetric(
+                                    horizontal: 20, vertical: 0),
+                                width: 270.0,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 20, top: 0, right: 0, bottom: 0),
+
+
+                                    child: TextField(
+                                      enabled: false,
+                                      textAlign: TextAlign.center,
+                                      decoration: new InputDecoration(
+                                          hintText: snapshot.data.email,
+
+                                          labelStyle: new TextStyle(color: const Color(0xFF808080)),
+                                          border: new UnderlineInputBorder(
+                                              borderSide: new BorderSide(
+                                                  color: Colors.grey
+                                              )
+                                          )
+                                      ),
+                                    ),
+                                  ),
+                                ),
+
+                            ],
+                          )),
+                    ),
+
+                    Padding(
+                      padding: const EdgeInsets.only(top: 15),
+                      child: Text("Cambia password",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 20),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          left: 10, top: 20, right: 0, bottom: 0),
+                      child: Container(
+                          child: Row(
+                            children: <Widget>[
+                              Container(
+                                margin: const EdgeInsets.symmetric(
+                                    horizontal: 21, vertical: 0),
+                                width: MediaQuery.of(context).size.width * 0.85,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 0, top: 5, right: 0, bottom: 0),
+                                 child: TextFormField(
+                                    initialValue: '',
+                                   obscureText:true,
+                                   enableSuggestions: false,
+                                   autocorrect: false,
+                                    decoration: InputDecoration(
+                                      labelText: 'Vecchia password',
+                                      border: OutlineInputBorder(),
+                                    ),
+                                   onChanged: (input) {oldPass = input;},
+                                  ),
+
+                                ),
+                              ),
+                            ],
+                          )),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          left: 10, top: 20, right: 0, bottom: 0),
+                      child: Container(
+                          child: Row(
+                            children: <Widget>[
+
+                              Container(
+                                margin: const EdgeInsets.symmetric(
+                                    horizontal: 21, vertical: 0),
+                                width: MediaQuery.of(context).size.width * 0.85,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 0, top: 5, right: 0, bottom: 0),
+                                  child: TextFormField(
+                                    initialValue: '',
+                                    obscureText:true,
+                                    enableSuggestions: false,
+                                    autocorrect: false,
+                                    decoration: InputDecoration(
+                                      labelText: 'Nuova password',
+                                      border: OutlineInputBorder(),
+                                    ),
+                                    onChanged: (input) {pass = input;},
+                                  ),
+
+                                ),
+                              ),
+                            ],
+                          )),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          left: 0, top: 30, right: 0, bottom: 0),
+                      child: RoundedButton(
+                        text: "Salva modifiche",
+                        press: () {
+                          if(!(pass == "")) {
+                            getDataService.changePassword(oldPass,pass,context);
+                          }
+                        },
+                      ),
+                    ),
+                  ],
+                )),
+          ),
         );
       }
       return Text("Loading...");

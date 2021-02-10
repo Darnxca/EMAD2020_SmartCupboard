@@ -12,7 +12,8 @@ class Profilo extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          title: Text('Profilo'),
+          centerTitle: true,
+          title: Text('Profilo',style: TextStyle(fontSize: 25.0),),
         ),
         drawer: MainDrawer(), //menu laterale
         body: Body(),

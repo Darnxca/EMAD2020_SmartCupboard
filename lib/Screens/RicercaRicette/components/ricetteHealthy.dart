@@ -41,7 +41,7 @@ class _RicetteHealthyState extends State<RicetteHealthy> {
                           alignment: Alignment.topCenter,
                           child: InkWell(
                             child: Container(
-                                height: 150,
+                                height: 120,
                                 margin: const EdgeInsets.symmetric(
                                     horizontal: 20, vertical: 40),
                                 decoration: BoxDecoration(
@@ -63,16 +63,16 @@ class _RicetteHealthyState extends State<RicetteHealthy> {
                                           padding: const EdgeInsets.only(
                                               left: 0.0,
                                               top: 0.0, bottom: 0.0),
-                                          child: Image.network(
-                                              snapshot.data[index].urlImg,
-                                              height: 100,
-                                              width: 120)),
+                                        child: Image.network(
+                                            snapshot.data[index].urlImg,
+                                            cacheWidth: 120,
+                                            fit: BoxFit.cover),),
                                       Column(
                                         crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                         children: <Widget>[
                                           Padding(
-                                            padding: const EdgeInsets.only(left: 20.0),
+                                            padding: const EdgeInsets.only(left: 20.0,top:5.0),
                                             child: Text(
                                               snapshot.data[index].nomeRicetta,
                                               style: const TextStyle(
@@ -83,7 +83,7 @@ class _RicetteHealthyState extends State<RicetteHealthy> {
                                             ),
                                           ),
                                           Padding(
-                                            padding: const EdgeInsets.only(left: 20.0),
+                                            padding: const EdgeInsets.only(left: 20.0,top:10.0),
                                             child: Text(
                                               "Difficoltà: "+ snapshot.data[index].difficolta,
                                               style: const TextStyle(

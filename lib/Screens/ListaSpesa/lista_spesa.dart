@@ -4,6 +4,7 @@ import 'package:smart_cupboard/GetDataService.dart';
 import 'package:smart_cupboard/Prodotti.dart';
 import 'package:smart_cupboard/Screens/HomePage/Components/CategoriesScroller.dart';
 import 'package:smart_cupboard/Screens/HomePage/Components/MainDrawer.dart';
+import 'package:smart_cupboard/Screens/HomePage/home_page.dart';
 import 'package:smart_cupboard/components/rounded_button.dart';
 import 'package:smart_cupboard/components/rounded_input_field.dart';
 import 'package:smart_cupboard/modal/ListaSpesaEntity.dart';
@@ -107,15 +108,20 @@ class _MyHomePageState extends State<ListaSpesa> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
+
         appBar: AppBar(
-          title: Text('Lista della spesa'),
+          centerTitle: true,
+          title: Text('Lista della spesa',style: TextStyle(fontSize: 25.0),),
+          leading: BackButton(
+            onPressed: _tornaindietro,
+          ),
         ),
-        drawer: MainDrawer(), //menu laterale
+
         body: Container(
           height: size.height,
           child: Column(
             children: <Widget>[
-              const SizedBox(
+              /*const SizedBox(
                 width: double.infinity,
                 height: 40,
                 child: Padding(
@@ -127,7 +133,7 @@ class _MyHomePageState extends State<ListaSpesa> {
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                   ),
                 ),
-              ),
+              ),*/
               Expanded(
                   child: FutureBuilder(
                       future: _getData,
@@ -323,5 +329,15 @@ class _MyHomePageState extends State<ListaSpesa> {
             ),
           );
         });
+  }
+  void _tornaindietro(){
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) {
+          return HomePage();
+        },
+      ) ,
+    );
   }
 }

@@ -13,7 +13,7 @@ class Ricetta_Screen extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Colors.orange,
-        title: Text('Ricette'),
+        title: Text('Ricette',style: TextStyle(fontSize: 25.0,color: Color(0xFF000000))),
       ),
       body: Container(
         width: double.infinity,
@@ -45,15 +45,15 @@ class Ricetta_Screen extends StatelessWidget {
                     decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(40),
-                            topRight: Radius.circular(40))),
+                            topLeft: Radius.circular(30),
+                            topRight: Radius.circular(30))),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
                           ricetta.nomeRicetta,
                           style: TextStyle(
-                              fontSize: 22, fontWeight: FontWeight.bold),
+                              fontSize: 20, fontWeight: FontWeight.bold),
                         ),
 
                         SizedBox(

@@ -31,32 +31,37 @@ class CategoriesScroller extends StatelessWidget {
                         fit: BoxFit.cover,
                       ),
                       borderRadius: BorderRadius.all(Radius.circular(20.0))),
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.end,
 
                       children: <Widget>[
-                      Center(child:Container(
-                        padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
-                        child: Text(
-                          "Farine e derivati",
-                          style: TextStyle(
-                              fontSize: 18,
-                              color: Black,
-                              background: Paint()..color = Colors.grey[350].withOpacity(0.85)
-                             ..strokeWidth = 25
-                              ..style = PaintingStyle.stroke,
-                              //backgroundColor: Colors.grey[350].withOpacity(0.7)..strokeWidth= 16.5,
-                              fontWeight: FontWeight.bold),
+                      Container(
+
+
+                        child: SizedBox(
+                            width: categoryWidtht,
+                          child: DecoratedBox(
+                          decoration: BoxDecoration(
+                            color: Colors.grey[350].withOpacity(0.85),
+                            borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20.0), bottomRight: Radius.circular(20.0))
+                          ),
+                            child: Text(
+                              "  Farine e derivati",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  color: Black,
+                                  //backgroundColor: Colors.grey[350].withOpacity(0.7)..strokeWidth= 16.5,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
                         ),
                         ),
-                      ),
                       ],
                     ),
-                  ),
+
                 ),
                 onTap: () {
                   Navigator.push(
@@ -79,27 +84,34 @@ class CategoriesScroller extends StatelessWidget {
                       fit: BoxFit.cover,
                     ),
                     borderRadius: BorderRadius.all(Radius.circular(20.0))),
-                child: Padding(
-                  padding: const EdgeInsets.all(12.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
-                      Text(
-                        "Carni",
-                        style: TextStyle(
-                            fontSize: 18,
-                            color: Black,
-                            background: Paint()..color = Colors.grey[350].withOpacity(0.85)
-                              ..strokeWidth = 25
-                              ..style = PaintingStyle.stroke,
-                            //backgroundColor: Colors.grey[350].withOpacity(0.7)..strokeWidth= 16.5,
-                            fontWeight: FontWeight.bold),
+
+                      Container(
+                  child: SizedBox(
+                    width: categoryWidtht,
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(
+                          color: Colors.grey[350].withOpacity(0.85),
+                          borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20.0), bottomRight: Radius.circular(20.0))
                       ),
+                        child: Text(
+                          "Carni",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 18,
+                              color: Black,
+                              //backgroundColor: Colors.grey[350].withOpacity(0.7)..strokeWidth= 16.5,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                  ),
+                      )
                     ],
                   ),
-                ),
               ),
               Container(
                 width: categoryWidtht,
@@ -111,27 +123,34 @@ class CategoriesScroller extends StatelessWidget {
                       fit: BoxFit.cover,
                     ),
                     borderRadius: BorderRadius.all(Radius.circular(20.0))),
-                child: Padding(
-                  padding: const EdgeInsets.all(12.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
-                      Text(
-                        "Frutta",
-                        style: TextStyle(
-                            fontSize: 18,
-                            color: Black,
-                            background: Paint()..color = Colors.grey[350].withOpacity(0.85)
-                              ..strokeWidth = 25
-                              ..style = PaintingStyle.stroke,
-                            //backgroundColor: Colors.grey[350].withOpacity(0.7)..strokeWidth= 16.5,
-                            fontWeight: FontWeight.bold),
+                      Container(
+                        child: SizedBox(
+                          width: categoryWidtht,
+                          child: DecoratedBox(
+                            decoration: BoxDecoration(
+                                color: Colors.grey[350].withOpacity(0.85),
+                                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20.0), bottomRight: Radius.circular(20.0))
+                            ),
+                        child: Text(
+                          "Frutta",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 18,
+                              color: Black,
+                              //backgroundColor: Colors.grey[350].withOpacity(0.7)..strokeWidth= 16.5,
+                              fontWeight: FontWeight.bold),
+                        ),
                       ),
+                  ),
+                      )
                     ],
                   ),
-                ),
+
               ),
             ],
           ),

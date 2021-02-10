@@ -101,7 +101,10 @@ class _MyHomePageState extends State<HomePage> {
                       } else
                       if (snapshot.connectionState == ConnectionState.done) {
                         if (snapshot.data.length == 0) {
-                          return Text("Ci dispiace, non ci sono ricette riproducibili con i tuoi ingredienti");
+                          return Padding(
+                            padding: const EdgeInsets.only(left: 20.0, right: 10.0),
+                            child: Text("Aggiungi i prodotti alla tua dispensa digitale per visualizzare le ricette qui."),
+                          );
                         }
                           return snapshot.hasData
                               ? ListView.builder(

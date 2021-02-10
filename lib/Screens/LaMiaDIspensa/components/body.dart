@@ -64,24 +64,31 @@ class _BodyExpansionPanelState extends State<BodyExpansionPanel> {
                           fit: BoxFit.cover,
                         ),
                         borderRadius: BorderRadius.all(Radius.circular(20.0))),
-                    child: Padding(
-                      padding: const EdgeInsets.all(12.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: <Widget>[
-                          Text(
-                            item.categoryName,
-                            style: TextStyle(
-                                fontSize: 18,
-                                color: Black,
-                                backgroundColor: Colors.grey[350],
-                                fontWeight: FontWeight.bold),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.height,
+                            child: DecoratedBox(
+                              decoration: BoxDecoration(
+                                  color: Colors.grey[350].withOpacity(0.85),
+                                  borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20.0), bottomRight: Radius.circular(20.0))
+                              ),
+                              child: Text(
+                                item.categoryName,
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontSize: 18,
+                                    color: Black,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
                           ),
                         ],
                       ),
-                    ),
+
                   );
                 },
                 body: new ListView.builder(

@@ -3,7 +3,6 @@ import 'package:flutter/rendering.dart';
 import 'package:smart_cupboard/GetDataService.dart';
 import 'package:smart_cupboard/Prodotti.dart';
 import 'package:smart_cupboard/Screens/HomePage/Components/CategoriesScroller.dart';
-import 'package:smart_cupboard/Screens/HomePage/Components/MainDrawer.dart';
 import 'package:smart_cupboard/Screens/HomePage/home_page.dart';
 import 'package:smart_cupboard/components/rounded_button.dart';
 import 'package:smart_cupboard/components/rounded_input_field.dart';
@@ -184,47 +183,57 @@ class _MyHomePageState extends State<ListaSpesa> {
                                                 top: 15.0,
                                                 right: 5.0,
                                                 bottom: 5.0),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                              children: <Widget>[
-                                            Column(
-                                            crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                              children: <Widget>[
-                                                SizedBox(height: 7),
-                                                Text(
-                                                  snapshot.data[index].name,
-                                                  textAlign:
-                                                  TextAlign.center,
-                                                  style: const TextStyle(
-                                                      fontSize: 20,
-                                                      fontWeight:
-                                                      FontWeight.bold),
+                                            child:  Table(
+
+                                              defaultColumnWidth: FixedColumnWidth(120.0),
+                                              children: [
+                                                TableRow(
+                                                    children: [
+                                                      TableCell(child: Padding(
+                                                        padding: const EdgeInsets.only(top: 10.0),
+                                                        child: Text(
+                                                          snapshot.data[index].name,
+                                                          textAlign:
+                                                          TextAlign.center,
+                                                          style: const TextStyle(
+                                                              fontSize: 20,
+                                                              fontWeight:
+                                                              FontWeight.bold),
+                                                        ),
+                                                      ),),
+                                                      TableCell(child: Padding(
+                                                        padding: const EdgeInsets.only(top: 10.0),
+                                                        child: Icon(Icons.remove),
+                                                      )),
+                                                      TableCell(child:  IconButton(
+                                                        icon: Icon(
+                                                            Icons.restore_from_trash),
+                                                        tooltip: "Prodotto rimosso dalla dispensa",
+                                                        onPressed: () {
+                                                          getDataService.removeProductFromListaSpesa(snapshot.data[index].EAN).then((value) {
+                                                            Navigator.pop(context);
+                                                            Navigator.push(context, MaterialPageRoute(
+                                                              builder: (context) {
+                                                                return ListaSpesa();
+                                                                //return tempScreen();
+                                                              },
+                                                            ),
+                                                            );
+                                                          });
+                                                        },
+                                                      )),
+                                                    ]
                                                 ),
+
                                               ],
+
                                             ),
-                                            SizedBox(width: 80),
-                                            Icon(Icons.remove),
-                                            SizedBox(width: 30),
-                                            IconButton(
-                                              icon: Icon(
-                                                  Icons.restore_from_trash),
-                                              tooltip: "Prodotto rimosso dalla dispensa",
-                                              onPressed: () {
-                                                getDataService.removeProductFromListaSpesa(snapshot.data[index].EAN).then((value) {
-                                                  Navigator.pop(context);
-                                                  Navigator.push(context, MaterialPageRoute(
-                                                    builder: (context) {
-                                                      return ListaSpesa();
-                                                      //return tempScreen();
-                                                    },
-                                                  ),
-                                                  );
-                                                });
-                                              },
-                                            )]
-                                            ),
+
+
+
+
+
+
                                           )),
                                     ),
                                   ));

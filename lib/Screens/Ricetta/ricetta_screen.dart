@@ -59,10 +59,15 @@ class Ricetta_Screen extends StatelessWidget {
                         SizedBox(
                           height: 5,
                         ),
-                        Text(
-                          "Difficoltà: " + ricetta.difficolta,
-                          style: TextStyle(
-                              fontSize: 15, fontWeight: FontWeight.normal),
+                        Row(
+                          children: [
+                            Text(
+                              "Difficoltà: ",
+                              style: TextStyle(
+                                  fontSize: 15, fontWeight: FontWeight.normal),
+                            ),
+                            Image.asset("assets/images/"+ricetta.difficolta +".png")
+                          ],
                         ),
                         SizedBox(
                           height: 25,

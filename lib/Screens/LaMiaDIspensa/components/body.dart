@@ -57,38 +57,42 @@ class _BodyExpansionPanelState extends State<BodyExpansionPanel> {
             children: snapshot.data.map<ExpansionPanel>((Item item) {
               return ExpansionPanel(
                 headerBuilder: (BuildContext context, bool isExpanded) {
-                  return Container(
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage("assets/images/imgCategorie/" + item.urlImg),
-                          fit: BoxFit.cover,
-                        ),
-                        borderRadius: BorderRadius.all(Radius.circular(20.0))),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: <Widget>[
-                          SizedBox(
-                            width: MediaQuery.of(context).size.height,
-                            child: DecoratedBox(
-                              decoration: BoxDecoration(
-                                  color: Colors.grey[350].withOpacity(0.85),
-                                  borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20.0), bottomRight: Radius.circular(20.0))
-                              ),
-                              child: Text(
-                                item.categoryName,
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontSize: 18,
-                                    color: Black,
-                                    fontWeight: FontWeight.bold),
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 15.0),
+                    child: Container(
+                      height: 80,
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage("assets/images/imgCategorie/" + item.urlImg),
+                            fit: BoxFit.cover,
+                          ),
+                          borderRadius: BorderRadius.all(Radius.circular(20.0))),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: <Widget>[
+                            SizedBox(
+                              width: MediaQuery.of(context).size.height,
+                              child: DecoratedBox(
+                                decoration: BoxDecoration(
+                                    color: Colors.grey[350].withOpacity(0.85),
+                                    borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20.0), bottomRight: Radius.circular(20.0))
+                                ),
+                                child: Text(
+                                  item.categoryName,
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      color: Black,
+                                      fontWeight: FontWeight.bold),
+                                ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
+                          ],
+                        ),
 
+                    ),
                   );
                 },
                 body: new ListView.builder(
@@ -100,46 +104,58 @@ class _BodyExpansionPanelState extends State<BodyExpansionPanel> {
                         padding: const EdgeInsets.only(left: 18.0,
                             right: 18.0,
                             bottom: 5.0),
-                        child: new Row(
-                          children: <Widget>[
-                            Text(
-                              item.prodottiDipensa[index].name,
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  color: Black,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            Spacer(),
-                            IconButton(
-                              icon: Icon(Icons.add_shopping_cart),
-                              tooltip: "Prodotto aggiunto alla lista della spesa",
-                              onPressed: () {
-                                getDataService.inserisciProdottoListaSpesa(ListaSpesaEntity( item.prodottiDipensa[index].EAN, item.prodottiDipensa[index].name)).then((value) {
-                                  Scaffold.of(context).showSnackBar(SnackBar(
-                                    content: Text("Prodotto aggiunto alla lista della spesa"),
-                                  ));
-                                });
-                              },
-                            
-                            ),
-                            Spacer(),
-                            IconButton(
-                              icon: Icon(Icons.restore_from_trash),
-                              tooltip: "Prodotto rimosso dalla dispensa",
-                              onPressed: () {
-                                getDataService.cancellaProdottoDallaDispensa( item.prodottiDipensa[index].EAN).then((value) {
-                                  Navigator.pop(context);
-                                  Navigator.push(context, MaterialPageRoute(
-                                    builder: (context) {
-                                      return MyDispensaScreen();
-                                      //return tempScreen();
-                                    },
+                        child: Table(
+
+                          defaultColumnWidth: FixedColumnWidth(120.0),
+                          children: [
+                            TableRow(
+                              children: [
+                                TableCell(child: Padding(
+                                  padding: const EdgeInsets.only(top : 10),
+                                  child: Text(
+                                    item.prodottiDipensa[index].name,
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        color: Black,
+                                        fontWeight: FontWeight.bold),
                                   ),
-                                  );
-                                });
-                              },
+                                )),
+                                TableCell(child: IconButton(
+                                  alignment: Alignment.topRight,
+                                  icon: Icon(Icons.add_shopping_cart),
+                                  tooltip: "Prodotto aggiunto alla lista della spesa",
+                                  onPressed: () {
+                                    getDataService.inserisciProdottoListaSpesa(ListaSpesaEntity( item.prodottiDipensa[index].EAN, item.prodottiDipensa[index].name)).then((value) {
+                                      Scaffold.of(context).showSnackBar(SnackBar(
+                                        content: Text("Prodotto aggiunto alla lista della spesa"),
+                                      ));
+                                    });
+                                  },
+
+                                ),),
+                                TableCell(child:  IconButton(
+                      alignment: Alignment.topRight,
+                                  icon: Icon(Icons.restore_from_trash),
+
+                                  tooltip: "Prodotto rimosso dalla dispensa",
+                                  onPressed: () {
+                                    getDataService.cancellaProdottoDallaDispensa( item.prodottiDipensa[index].EAN).then((value) {
+                                      Navigator.pop(context);
+                                      Navigator.push(context, MaterialPageRoute(
+                                        builder: (context) {
+                                          return MyDispensaScreen();
+                                          //return tempScreen();
+                                        },
+                                      ),
+                                      );
+                                    });
+                                  },
+                                ),),
+                              ]
                             ),
+
                           ],
+
                         ),
                       );
                     }

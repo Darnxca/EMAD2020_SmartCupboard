@@ -163,12 +163,17 @@ class _MyHomePageState extends State<HomePage> {
                                                     ),
                                                     Padding(
                                                       padding: const EdgeInsets.only(left: 20.0,top:10.0),
-                                                      child: Text(
-                                                        "Difficoltà: "+snapshot.data[index].difficolta,
-                                                        style: const TextStyle(
-                                                            fontSize: 15,
-                                                            decoration: TextDecoration.none,
-                                                            color: Colors.grey),
+                                                      child: Row(
+                                                        children: [
+                                                          Text(
+                                                            "Difficoltà: ",
+                                                            style: const TextStyle(
+                                                                fontSize: 15,
+                                                                decoration: TextDecoration.none,
+                                                                color: Colors.grey),
+                                                          ),
+                                                          Image.asset("assets/images/"+snapshot.data[index].difficolta +".png")
+                                                        ],
                                                       ),
                                                     ),
                                                     SizedBox(

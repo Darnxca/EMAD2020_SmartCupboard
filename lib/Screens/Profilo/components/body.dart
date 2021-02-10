@@ -55,6 +55,9 @@ class _BodyState extends State<Body> {
                                     left: 0, top: 10, right: 0, bottom: 0),
                                 child: Text(
                                   "Nome",
+                                  maxLines: 1,
+                                  overflow: TextOverflow.visible,
+                                  softWrap: false,
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold, fontSize: 18),
                                 ),
@@ -62,7 +65,7 @@ class _BodyState extends State<Body> {
                               Container(
                                 margin: const EdgeInsets.symmetric(
                                     horizontal: 28, vertical: 0),
-                                width: 250.0,
+                                width: 225.0,
                                 child: Padding(
                                   padding: const EdgeInsets.only(
                                       left: 10, top: 0, right: 0, bottom: 0),
@@ -96,6 +99,9 @@ class _BodyState extends State<Body> {
                                     left: 0, top: 10, right: 10, bottom: 0),
                                 child: Text(
                                   "Cognome",
+                                  maxLines: 1,
+                                  overflow: TextOverflow.visible,
+                                  softWrap: false,
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold, fontSize: 18),
                                 ),
@@ -103,7 +109,7 @@ class _BodyState extends State<Body> {
                               Container(
                                 margin: const EdgeInsets.symmetric(
                                     horizontal: 2, vertical: 0),
-                                width: 250.0,
+                                width: 220.0,
                                 child: Padding(
                                   padding: const EdgeInsets.only(
                                       left: 0, top: 0, right: 0, bottom: 0),
@@ -137,6 +143,9 @@ class _BodyState extends State<Body> {
                                     left: 0, top: 10, right: 0, bottom: 0),
                                 child: Text(
                                   "Email",
+                                  maxLines: 1,
+                                  overflow: TextOverflow.visible,
+                                  softWrap: false,
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold, fontSize: 18),
                                 ),
@@ -144,11 +153,10 @@ class _BodyState extends State<Body> {
                               Container(
                                 margin: const EdgeInsets.symmetric(
                                     horizontal: 20, vertical: 0),
-                                width: 270.0,
+                                width: 240.0,
                                 child: Padding(
                                   padding: const EdgeInsets.only(
                                       left: 20, top: 0, right: 0, bottom: 0),
-
 
                                     child: TextField(
                                       enabled: false,

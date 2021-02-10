@@ -38,6 +38,7 @@ class _TueRicetteState extends State<TueRicette> {
                     itemCount: snapshot.data.length,
                     //effetto rimbalzo
                     itemBuilder: (context, index) {
+
                       return Align(
                           heightFactor: 0.7,
                           alignment: Alignment.topCenter,

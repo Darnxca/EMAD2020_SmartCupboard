@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:share/share.dart';
 import 'package:smart_cupboard/GetDataService.dart';
 import 'package:smart_cupboard/Prodotti.dart';
 import 'package:smart_cupboard/Screens/HomePage/Components/CategoriesScroller.dart';
@@ -7,7 +8,6 @@ import 'package:smart_cupboard/Screens/HomePage/home_page.dart';
 import 'package:smart_cupboard/components/rounded_button.dart';
 import 'package:smart_cupboard/components/rounded_input_field.dart';
 import 'package:smart_cupboard/modal/ListaSpesaEntity.dart';
-import '../../constants.dart';
 
 class ListaSpesa extends StatefulWidget {
   @override
@@ -25,62 +25,6 @@ class _MyHomePageState extends State<ListaSpesa> {
   Future<List<Prodotti>> _getData;
   GetDataService getDataService = GetDataService();
 
-  void getPostsData() {
-    List<dynamic> responseList = FOOD_DATA;
-    List<Widget> listItems = [];
-
-    FutureBuilder(
-        future: _getData,
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-          if (snapshot.hasError) {
-            print("Errore" + snapshot.error.toString());
-            return Text(snapshot.error.toString());
-          }
-          if (snapshot.connectionState == ConnectionState.done) {
-            print("Eccomi");
-            listItems.add(Container(
-                height: 70,
-                margin:
-                const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.black.withAlpha(100), blurRadius: 10.0),
-                    ]),
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                      left: 15.0, top: 15.0, right: 5.0, bottom: 15.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: <Widget>[
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          SizedBox(height: 7),
-                          Text(
-                            snapshot.data["name"],
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
-                      SizedBox(width: 80),
-                      Icon(Icons.remove),
-                      SizedBox(width: 30),
-                      Icon(Icons.restore_from_trash),
-                    ],
-                  ),
-                )));
-            setState(() {
-              itemsData = listItems;
-            });
-          }
-          return Text("loading");
-        });
-  }
 
   @override
   void initState() {
@@ -120,19 +64,6 @@ class _MyHomePageState extends State<ListaSpesa> {
           height: size.height,
           child: Column(
             children: <Widget>[
-              /*const SizedBox(
-                width: double.infinity,
-                height: 40,
-                child: Padding(
-                  padding:
-                  EdgeInsets.only(top: 10, right: 0, left: 15, bottom: 5),
-                  child: Text(
-                    "Lista della spesa",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                  ),
-                ),
-              ),*/
               Expanded(
                   child: FutureBuilder(
                       future: _getData,
@@ -184,8 +115,7 @@ class _MyHomePageState extends State<ListaSpesa> {
                                                 right: 5.0,
                                                 bottom: 5.0),
                                             child:  Table(
-
-                                              defaultColumnWidth: FixedColumnWidth(120.0),
+                                              defaultColumnWidth: FixedColumnWidth(150.0),
                                               children: [
                                                 TableRow(
                                                     children: [
@@ -195,16 +125,15 @@ class _MyHomePageState extends State<ListaSpesa> {
                                                           snapshot.data[index].name,
                                                           textAlign:
                                                           TextAlign.center,
+                                                          maxLines: 1,
+                                                          overflow: TextOverflow.visible,
+                                                          softWrap: false,
                                                           style: const TextStyle(
-                                                              fontSize: 20,
+                                                              fontSize: 18,
                                                               fontWeight:
-                                                              FontWeight.bold),
+                                                              FontWeight.normal),
                                                         ),
                                                       ),),
-                                                      TableCell(child: Padding(
-                                                        padding: const EdgeInsets.only(top: 10.0),
-                                                        child: Icon(Icons.remove),
-                                                      )),
                                                       TableCell(child:  IconButton(
                                                         icon: Icon(
                                                             Icons.restore_from_trash),
@@ -224,16 +153,8 @@ class _MyHomePageState extends State<ListaSpesa> {
                                                       )),
                                                     ]
                                                 ),
-
                                               ],
-
                                             ),
-
-
-
-
-
-
                                           )),
                                     ),
                                   ));
@@ -243,31 +164,37 @@ class _MyHomePageState extends State<ListaSpesa> {
                         return Text("Loadind");
                       })),
               Row(children: <Widget>[
-                RoundedButton(
-                  text: "Rimuovi tutto",
-                  press: (){
-                    getDataService.removeAllFromListaSpesa().then((value) {
-                      Navigator.pop(context);
-                      Navigator.push(context, MaterialPageRoute(
-                        builder: (context) {
-                          return ListaSpesa();
-                          //return tempScreen();
-                        },
-                      ),
+                Container(
+                  width: 200,
+                  margin: const EdgeInsets.only(left: 10.0),
+                  child: RoundedButton(
+                    text: "Rimuovi tutto",
+                    press: (){
+                      getDataService.removeAllFromListaSpesa().then((value) {
+                        Navigator.pop(context);
+                        Navigator.push(context, MaterialPageRoute(
+                          builder: (context) {
+                            return ListaSpesa();
+                            //return tempScreen();
+                          },
+                        ),
+                        );
+                      }
                       );
-                    }
-                    );
-                  },
+                    },
+                  ),
                 ),
+
                 SizedBox(width: 10),
                 Container(
+                  margin: const EdgeInsets.only(top: 10.0),
                   child: Column(
                     children: <Widget>[
                       Padding(
                         padding: const EdgeInsets.only(
                             left: 0, top: 0, right: 5, bottom: 30.0),
                         child: new IconButton(
-                          icon: Icon(Icons.add_circle, size: 70),
+                          icon: Icon(Icons.add_circle, size: 50),
                           onPressed: () {
                             _settingModalBottomSheet(context);
                           },
@@ -276,7 +203,32 @@ class _MyHomePageState extends State<ListaSpesa> {
                     ],
                   ),
                 ),
-              ])
+                SizedBox(width: 10),
+                Container(
+                  margin: const EdgeInsets.only(top: 10.0),
+                  child: Column(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            left: 0, top: 0, right: 5, bottom: 30.0),
+                        child: new IconButton(
+                          icon: Icon(Icons.share, size: 50),
+                          onPressed: () {
+                            _getData.then((value) {
+                              String lista="Lista della spesa: \n";
+                              value.forEach((element) {
+                                lista+= element.name + "\n";
+                              });
+                              Share.share(lista + "\n Creata da SmartCupboard");
+                            });
+
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ]),
             ],
           ),
         ),
@@ -314,8 +266,8 @@ class _MyHomePageState extends State<ListaSpesa> {
                   ),
                   Container(
                     margin:
-                    const EdgeInsets.symmetric(horizontal: 85, vertical: 0),
-                    width: 230.0,
+                    const EdgeInsets.symmetric(horizontal: 75, vertical: 0),
+                    width: 250.0,
                     child: RoundedButton(
                       text: "Aggiungi alla lista",
                       press: (){

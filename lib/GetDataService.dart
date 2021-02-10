@@ -95,6 +95,25 @@ class GetDataService {
     });
   }
 
+  Future<List<Item>> inserisciProdottoListaSpesafromRicette(List<String> d) async {
+    Database db = await SingletonDatabaseConnection.instance.database;
+    Batch batch = db.batch();
+
+    int count =0 ;
+    d.forEach((element) {
+      ListaSpesaEntity l = ListaSpesaEntity(DateTime.now().millisecondsSinceEpoch.toString() + count.toString() , element);
+
+       batch.insert(
+        'ListaSpesa',
+        l.toMap(),
+        conflictAlgorithm: ConflictAlgorithm.replace,
+      );
+      count++;
+    });
+    batch.commit();
+  }
+
+
   Future<void> insertProdottoDispensa(DispensaEntity d) async {
     final Database db = await SingletonDatabaseConnection.instance.database;
 

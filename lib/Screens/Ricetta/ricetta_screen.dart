@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:smart_cupboard/GetDataService.dart';
+import 'package:smart_cupboard/components/rounded_button.dart';
 import 'package:smart_cupboard/modal/Ricetta.dart';
 
 class Ricetta_Screen extends StatelessWidget {
   @override
   Ricetta ricetta;
+
+  GetDataService getDataService = GetDataService();
 
   Ricetta_Screen({Key key, @required this.ricetta}) : super(key: key);
 
@@ -102,6 +106,16 @@ class Ricetta_Screen extends StatelessWidget {
                           )),
                         ]),
 
+                        RoundedButton(
+                          text: "Aggiungi alla lista della spesa",
+                          press: () {
+                            getDataService.inserisciProdottoListaSpesafromRicette(ricetta.ingredienti).then((value) {
+                              final snackBar = SnackBar(
+                                  content: Text('Ingredienti aggiunti alla lista della spesa'));
+                              Scaffold.of(context).showSnackBar(snackBar);
+                            });
+                          },
+                        ),
                         SizedBox(
                           height: 24,
                         ),

@@ -4,7 +4,6 @@ import 'package:smart_cupboard/GetDataService.dart';
 import 'package:smart_cupboard/modal/ListaSpesaEntity.dart';
 import '../../../constants.dart';
 import 'package:smart_cupboard/item.dart';
-
 import '../MyDispensaScreen.dart';
 
 class BodyExpansionPanel extends StatefulWidget {
@@ -106,7 +105,7 @@ class _BodyExpansionPanelState extends State<BodyExpansionPanel> {
                             bottom: 5.0),
                         child: Table(
 
-                          defaultColumnWidth: FixedColumnWidth(120.0),
+                          defaultColumnWidth: FixedColumnWidth(100.0),
                           children: [
                             TableRow(
                               children: [
@@ -114,6 +113,9 @@ class _BodyExpansionPanelState extends State<BodyExpansionPanel> {
                                   padding: const EdgeInsets.only(top : 10),
                                   child: Text(
                                     item.prodottiDipensa[index].name,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.visible,
+                                    softWrap: false,
                                     style: TextStyle(
                                         fontSize: 18,
                                         color: Black,
@@ -170,4 +172,3 @@ class _BodyExpansionPanelState extends State<BodyExpansionPanel> {
     );
   }
 }
-

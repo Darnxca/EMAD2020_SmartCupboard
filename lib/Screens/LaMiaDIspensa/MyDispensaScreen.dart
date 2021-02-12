@@ -200,6 +200,7 @@ class MyDispensaScreenState extends State<MyDispensaScreen>
                         },
                         items: <String>[
                           'Farine e derivati',
+                          'Latte e derivati',
                           'Frutta',
                           'Verdura',
                           'Carne',

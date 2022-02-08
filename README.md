@@ -1,6 +1,4 @@
-# smart_cupboard
-
-## SmartCupboard
+# SmartCupboard
 
 Progetto del corso du studi di EMAD dell'università degli studi di salerno.
 
